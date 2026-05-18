@@ -1,0 +1,2387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lesiones Medulares — Guía Clínica 2024–2025</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #060c1a;
+    --surface: #0f1e33;
+    --surface2: #162540;
+    --border: #1e3255;
+    --accent1: #3b82f6;
+    --accent2: #06b6d4;
+    --accent3: #f59e0b;
+    --accent4: #10b981;
+    --danger: #ef4444;
+    --text: #f1f5f9;
+    --text-muted: #cbd5e1;
+    --text-dim: #94a3b8;
+    --tab-trauma: #3b82f6;
+    --tab-inflam: #8b5cf6;
+    --tab-isq: #f59e0b;
+    --tab-other: #10b981;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, #0f1a35 0%, #0a0f1e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px 12px;
+    position: sticky; top: 0; z-index: 100;
+  }
+  @media (max-width: 600px) {
+    header { position: relative; }
+  }
+  .header-inner { max-width: 1100px; margin: 0 auto; }
+  .header-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3);
+    border-radius: 20px; padding: 3px 10px; font-size: 11px;
+    color: var(--accent1); letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header-badge::before { content: '●'; font-size: 8px; }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px; color: #fff; letter-spacing: -0.3px;
+  }
+  h1 span { color: var(--accent2); font-style: italic; }
+  .header-meta {
+    font-size: 11px; color: var(--text-dim); margin-top: 4px;
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+
+  /* MAIN TABS */
+  .tab-nav {
+    max-width: 1100px; margin: 24px auto 0; padding: 0 24px;
+    display: flex; gap: 4px; flex-wrap: wrap;
+  }
+  .tab-btn {
+    padding: 10px 20px; border: none; border-radius: 8px 8px 0 0;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    font-size: 13px; font-weight: 500; transition: all 0.2s;
+    display: flex; align-items: center; gap: 8px;
+    background: var(--surface2); color: var(--text-muted);
+    border-bottom: 3px solid transparent;
+  }
+  .tab-btn .tab-num {
+    width: 20px; height: 20px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 700;
+    background: rgba(255,255,255,0.08);
+  }
+  .tab-btn[data-tab="trauma"].active { background: rgba(59,130,246,0.15); color: var(--tab-trauma); border-bottom-color: var(--tab-trauma); }
+  .tab-btn[data-tab="inflam"].active { background: rgba(139,92,246,0.15); color: var(--tab-inflam); border-bottom-color: var(--tab-inflam); }
+  .tab-btn[data-tab="isq"].active { background: rgba(245,158,11,0.15); color: var(--tab-isq); border-bottom-color: var(--tab-isq); }
+  .tab-btn[data-tab="other"].active { background: rgba(16,185,129,0.15); color: var(--tab-other); border-bottom-color: var(--tab-other); }
+  .tab-btn:not(.active):hover { background: var(--surface); color: var(--text); }
+
+  /* CONTENT */
+  .content-wrap {
+    max-width: 1100px; margin: 0 auto; padding: 0 24px 40px;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .section-header {
+    border-top: 1px solid var(--border);
+    padding: 20px 0 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 20px; }
+
+  /* COLOR THEMING per tab */
+  [data-theme="trauma"] .section-icon { background: rgba(59,130,246,0.2); }
+  [data-theme="inflam"] .section-icon { background: rgba(139,92,246,0.2); }
+  [data-theme="isq"] .section-icon { background: rgba(245,158,11,0.2); }
+  [data-theme="other"] .section-icon { background: rgba(16,185,129,0.2); }
+
+  /* SUBSECTION TABS */
+  .sub-nav {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
+  }
+  .sub-btn {
+    padding: 6px 14px; border: 1px solid var(--border); border-radius: 6px;
+    background: transparent; color: var(--text-muted);
+    font-size: 12px; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .sub-btn.active, .sub-btn:hover { background: var(--surface2); color: var(--text); }
+  [data-theme="trauma"] .sub-btn.active { border-color: var(--tab-trauma); color: var(--tab-trauma); background: rgba(59,130,246,0.08); }
+  [data-theme="inflam"] .sub-btn.active { border-color: var(--tab-inflam); color: var(--tab-inflam); background: rgba(139,92,246,0.08); }
+  [data-theme="isq"] .sub-btn.active { border-color: var(--tab-isq); color: var(--tab-isq); background: rgba(245,158,11,0.08); }
+  [data-theme="other"] .sub-btn.active { border-color: var(--tab-other); color: var(--tab-other); background: rgba(16,185,129,0.08); }
+
+  .sub-content { display: none; }
+  .sub-content.active { display: block; animation: fadeIn 0.2s ease; }
+
+  /* CARDS GRID */
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; margin-bottom: 20px; }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { transform: translateY(-1px); }
+  [data-theme="trauma"] .card:hover { border-color: rgba(59,130,246,0.4); }
+  [data-theme="inflam"] .card:hover { border-color: rgba(139,92,246,0.4); }
+  [data-theme="isq"] .card:hover { border-color: rgba(245,158,11,0.4); }
+  [data-theme="other"] .card:hover { border-color: rgba(16,185,129,0.4); }
+  .card-label {
+    font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-dim); margin-bottom: 8px; font-weight: 600;
+  }
+  .card h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .card p, .card li { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .card ul { padding-left: 16px; }
+  .card ul li { margin-bottom: 3px; }
+
+  /* INFO BLOCKS */
+  .info-block {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 18px; margin-bottom: 14px;
+  }
+  .info-block h4 {
+    font-size: 13px; font-weight: 600; margin-bottom: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .info-block p, .info-block li { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
+  .info-block ul, .info-block ol { padding-left: 18px; }
+  .info-block li { margin-bottom: 4px; }
+
+  /* TAGS */
+  .tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 500; margin: 2px;
+  }
+  .tag-blue { background: rgba(59,130,246,0.2); color: #bfdbfe; }
+  .tag-purple { background: rgba(139,92,246,0.2); color: #ddd6fe; }
+  .tag-amber { background: rgba(245,158,11,0.2); color: #fde68a; }
+  .tag-green { background: rgba(16,185,129,0.2); color: #a7f3d0; }
+  .tag-red { background: rgba(239,68,68,0.2); color: #fecaca; }
+  .tag-gray { background: rgba(100,116,139,0.2); color: #cbd5e1; }
+
+  /* ALERT BOXES */
+  .alert {
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 14px;
+    border-left: 4px solid; font-size: 14px; line-height: 1.6;
+  }
+  .alert-warning { background: rgba(245,158,11,0.12); border-color: var(--accent3); color: #fde68a; }
+  .alert-info { background: rgba(59,130,246,0.12); border-color: var(--accent1); color: #bfdbfe; }
+  .alert-danger { background: rgba(239,68,68,0.12); border-color: var(--danger); color: #fecaca; }
+  .alert-success { background: rgba(16,185,129,0.12); border-color: var(--accent4); color: #a7f3d0; }
+  .alert strong { display: block; margin-bottom: 4px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; opacity: 0.7; }
+
+  /* TABLE */
+  .table-wrap { overflow-x: auto; margin-bottom: 14px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th {
+    background: var(--surface2); color: var(--text-muted);
+    padding: 10px 14px; text-align: left; font-weight: 500;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-muted); vertical-align: top; font-size: 14px; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* TIMELINE */
+  .timeline { position: relative; padding-left: 28px; }
+  .timeline::before { content:''; position:absolute; left:8px; top:0; bottom:0; width:2px; background:var(--border); }
+  .timeline-item { position: relative; margin-bottom: 18px; }
+  .timeline-dot {
+    position: absolute; left: -28px; top: 3px;
+    width: 16px; height: 16px; border-radius: 50%;
+    border: 2px solid; display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700;
+  }
+  .timeline-item h5 { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .timeline-item p { font-size: 13px; color: var(--text-muted); }
+
+  /* SOURCE CHIP */
+  .source-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--border); }
+  .cite-link {
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 10px; font-weight: 600; line-height: 1;
+    padding: 1px 5px; border-radius: 4px; margin-left: 3px;
+    background: rgba(6,182,212,0.15); color: var(--accent2);
+    border: 1px solid rgba(6,182,212,0.3);
+    text-decoration: none; vertical-align: middle;
+    transition: background 0.15s, color 0.15s;
+    white-space: nowrap;
+  }
+  .cite-link:hover { background: rgba(6,182,212,0.3); color: #fff; }
+  .cite-link::before { content: '↗ '; font-size: 9px; }
+
+    padding: 4px 10px; border-radius: 20px; font-size: 11px;
+    background: var(--surface2); color: var(--text-dim);
+    border: 1px solid var(--border);
+    text-decoration: none; transition: color 0.15s, border-color 0.15s;
+    cursor: pointer;
+  }
+  a.source-chip:hover { color: var(--accent2); border-color: var(--accent2); }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+  @media (max-width: 700px) { .two-col, .three-col { grid-template-columns: 1fr; } .card-grid { grid-template-columns: 1fr; } }
+
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
+  .mb-16 { margin-bottom: 16px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-badge">Neurología Clínica</div>
+    <h1>Lesiones <span>Medulares</span> — Diagnóstico y Manejo</h1>
+    <div class="header-meta">
+      <span>Guía basada en evidencia 2024–2025</span>
+      <span>AO Spine 2024 · NEMOS 2024 · AHA ISC 2025</span>
+      <span>Actualizado: mayo de 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="tab-nav" role="tablist" aria-label="Categorías de lesión medular">
+  <button type="button" class="tab-btn active" data-tab="trauma" role="tab" aria-selected="true" aria-controls="tab-trauma" onclick="switchTab('trauma')">
+    <span class="tab-num">1</span> Traumática
+  </button>
+  <button type="button" class="tab-btn" data-tab="inflam" role="tab" aria-selected="false" aria-controls="tab-inflam" onclick="switchTab('inflam')">
+    <span class="tab-num">2</span> Inflamatoria
+  </button>
+  <button type="button" class="tab-btn" data-tab="isq" role="tab" aria-selected="false" aria-controls="tab-isq" onclick="switchTab('isq')">
+    <span class="tab-num">3</span> Isquémica
+  </button>
+  <button type="button" class="tab-btn" data-tab="other" role="tab" aria-selected="false" aria-controls="tab-other" onclick="switchTab('other')">
+    <span class="tab-num">4</span> Otras Etiologías
+  </button>
+</div>
+
+<div class="content-wrap">
+
+<!-- ═══════════════════ TRAUMÁTICA ═══════════════════ -->
+<div class="tab-content active" id="tab-trauma" data-theme="trauma">
+  <div class="section-header">
+    <div class="section-icon">🦴</div>
+    <div>
+      <div class="section-title">Lesión Medular Traumática (LMT)</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">tSCI — Traumatic Spinal Cord Injury · Guía AO Spine 2024</div>
+    </div>
+  </div>
+
+  <div class="sub-nav" role="tablist">
+    <button type="button" class="sub-btn active" data-sub="t-epi" role="tab" aria-selected="true" onclick="switchSub('trauma','t-epi')">Epidemiología</button>
+    <button type="button" class="sub-btn" data-sub="t-path" role="tab" aria-selected="false" onclick="switchSub('trauma','t-path')">Fisiopatología</button>
+    <button type="button" class="sub-btn" data-sub="t-dx" role="tab" aria-selected="false" onclick="switchSub('trauma','t-dx')">Diagnóstico</button>
+    <button type="button" class="sub-btn" data-sub="t-cls" role="tab" aria-selected="false" onclick="switchSub('trauma','t-cls')">Clasificación ASIA</button>
+    <button type="button" class="sub-btn" data-sub="t-tx" role="tab" aria-selected="false" onclick="switchSub('trauma','t-tx')">Manejo Agudo</button>
+    <button type="button" class="sub-btn" data-sub="t-cx" role="tab" aria-selected="false" onclick="switchSub('trauma','t-cx')">Complicaciones</button>
+  </div>
+
+  <!-- Epidemiología -->
+  <div class="sub-content active" id="t-epi">
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Incidencia</div>
+        <h4>~16–54 / millón / año</h4>
+        <p>Varía por región. En Alemania ≈16/millón/año. En EE.UU. 54/millón. Incidencia global no traumática creciente por envejecimiento poblacional.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Demografía</div>
+        <h4>Pico bimodal</h4>
+        <p>Jóvenes 15–29 años (trauma de alta energía) y adultos mayores >65 años (caídas, estenosis previa). Predominio masculino 4:1.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Mecanismos</div>
+        <h4>Causas principales</h4>
+        <ul>
+          <li>Accidentes de tránsito (~38%)</li>
+          <li>Caídas (~31%)</li>
+          <li>Violencia / armas (~14%)</li>
+          <li>Actividades deportivas (~9%)</li>
+          <li>Heridas penetrantes</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Distribución anatómica</div>
+        <h4>Niveles más frecuentes</h4>
+        <ul>
+          <li>Cervical: 55–60% (C4–C6)</li>
+          <li>Torácico: 15–20%</li>
+          <li>Lumbar: 15–20%</li>
+          <li>Sacro: raro</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-info">
+      <strong>Impacto</strong>
+      La LMT es una de las condiciones más devastadoras de la medicina moderna, con profundo impacto en calidad de vida, esperanza de vida y costos en salud. El manejo agudo requiere decisiones rápidas y basadas en evidencia.
+    </div>
+  </div>
+
+  <!-- Fisiopatología -->
+  <div class="sub-content" id="t-path">
+    <div class="two-col">
+      <div class="info-block">
+        <h4>🔴 Lesión Primaria</h4>
+        <p>Resultado directo de las fuerzas mecánicas sobre el tejido medular. Produce:</p>
+        <ul style="margin-top:8px">
+          <li>Microhemorragias y disrupción axonal</li>
+          <li>Necrosis celular inmediata</li>
+          <li>Daño a la barrera hemato-medular</li>
+          <li>Disrupción vascular local</li>
+        </ul>
+        <div class="pill-row">
+          <span class="tag tag-red">Irreversible</span>
+          <span class="tag tag-gray">Ocurre en segundos</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h4>🟠 Lesión Secundaria</h4>
+        <p>Cascada de eventos posteriores que agravan el daño inicial. Objetivo terapéutico principal:</p>
+        <ul style="margin-top:8px">
+          <li>Isquemia y hipoperfusión medular</li>
+          <li>Edema e inflamación</li>
+          <li>Excitotoxicidad (glutamato)</li>
+          <li>Apoptosis tardía</li>
+          <li>Disfunción mitocondrial</li>
+          <li>Formación de cavidades (quistes post-traumáticos)</li>
+        </ul>
+        <div class="pill-row">
+          <span class="tag tag-amber">Potencialmente modificable</span>
+          <span class="tag tag-gray">Horas–días</span>
+        </div>
+      </div>
+    </div>
+    <div class="alert alert-warning">
+      <strong>Concepto clave — "Time is Spine"</strong>
+      Las intervenciones tempranas (MAP, cirugía) están dirigidas a limitar la lesión secundaria. Cada hora de demora puede impactar el pronóstico neurológico.
+    </div>
+    <div class="info-block">
+      <h4>⚡ Shock Medular</h4>
+      <p>Estado agudo transitorio de pérdida o depresión de toda la actividad refleja espinal por debajo del nivel de lesión, resultante de la interrupción brusca de las vías supraespinales. Se manifiesta con flacidez, arreflexia osteotendinosa, anestesia completa y disfunción autonómica (hipotensión, bradicardia, retención urinaria). <strong>El examen neurológico durante esta fase puede subestimar significativamente el nivel real de la lesión — se requiere reevaluación seriada.</strong></p>
+
+      <p style="margin-top:10px"><strong>Fases de recuperación refleja (Ditunno et al. — modelo en 4 fases):</strong> <a class="cite-link" href="https://www.ncbi.nlm.nih.gov/books/NBK448163/" target="_blank">StatPearls 2024</a></p>
+      <div class="table-wrap" style="margin-top:8px">
+        <table>
+          <thead><tr><th>Fase</th><th>Tiempo</th><th>Mecanismo</th><th>Reflejos presentes</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Fase 1</strong></td>
+              <td>0–24 h</td>
+              <td>Hiperpolarización de motoneurona</td>
+              <td>Arreflexia o hiporreflexia. Primer reflejo patológico: <strong>reflejo plantar retardado</strong>. Puede aparecer bulbocavernoso y cremastérico.</td>
+            </tr>
+            <tr>
+              <td><strong>Fase 2</strong></td>
+              <td>Día 1–3</td>
+              <td>Supersensibilidad por denervación + upregulation de receptores</td>
+              <td>Reflejos cutáneos más prominentes. Reflejos tendinosos profundos aún ausentes. Retorno del <strong>reflejo bulbocavernoso</strong> y <strong>anal</strong>.</td>
+            </tr>
+            <tr>
+              <td><strong>Fase 3</strong></td>
+              <td>Día 4 – semana 1</td>
+              <td>Brotación axonal (axon sprouting) temprana</td>
+              <td>Retorno de reflejos tendinosos: <strong>reflejo aquíleo</strong>, luego <strong>rotuliano</strong>. Puede aparecer <strong>signo de Babinski</strong>. Inicio de espasmos flexores.</td>
+            </tr>
+            <tr>
+              <td><strong>Fase 4</strong></td>
+              <td>Semana 1–12+</td>
+              <td>Brotación axonal tardía + remodelación sináptica</td>
+              <td>Hiperreflexia, hipertonía, clonus. Transición a espasticidad. <strong>Signo de Babinski</strong> establecido. Espasmos extensores y flexores.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="alert alert-warning" style="margin-top:12px">
+        <strong>⚠ Sobre el reflejo bulbocavernoso como marcador pronóstico</strong>
+        Clásicamente descrito como el "primer signo de fin del shock medular", pero la evidencia actual lo cuestiona: un análisis prospectivo del registro NACTN (2023) no encontró relación significativa entre el resultado del reflejo bulbocavernoso y la conversión de grado AIS, score motor ni sensitivo al seguimiento. <a class="cite-link" href="https://journals.sagepub.com/doi/10.1089/neu.2022.0412" target="_blank">Ali et al. J Neurotrauma 2023</a> Su ausencia persistente puede indicar lesión de cono medular (ej. fractura L1). No debe usarse como único marcador pronóstico.
+      </div>
+
+      <div class="pill-row" style="margin-top:4px">
+        <span class="tag tag-amber">Reevaluación neurológica: 24–72h y 7 días</span>
+        <span class="tag tag-gray">Duración media: 4–12 semanas</span>
+        <span class="tag tag-gray">Ditunno et al. — 4 fases</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagnóstico -->
+  <div class="sub-content" id="t-dx">
+    <div class="alert alert-danger">
+      <strong>⚠ Emergencia — Secuencia diagnóstica prioritaria</strong>
+      Estabilización ABCDE → Inmovilización → Examen neurológico → Imágenes → Clasificación AIS
+    </div>
+    <h3>Evaluación Clínica Inicial</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Historia</div>
+        <h4>Mecanismo de lesión</h4>
+        <ul>
+          <li>Tipo de trauma (flexo-extensión, compresión axial)</li>
+          <li>Tiempo transcurrido desde la lesión</li>
+          <li>Pérdida de consciencia</li>
+          <li>Déficits desde el inicio vs progresivos</li>
+          <li>Tratamientos previos (corticoides)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Examen neurológico</div>
+        <h4>ISNCSCI (ASIA)</h4>
+        <ul>
+          <li>Fuerza: 10 grupos musculares clave</li>
+          <li>Sensibilidad táctil superficial (28 dermatomas)</li>
+          <li>Sensibilidad algésica (28 dermatomas)</li>
+          <li>Función sacra (S4–S5): sensibilidad sacra, presión anal profunda, contracción anal voluntaria</li>
+          <li>Nivel neurológico de lesión (NLI)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Signos de alarma</div>
+        <h4>Banderas rojas</h4>
+        <ul>
+          <li>Shock neurogénico (hipotensión + bradicardia)</li>
+          <li>Retención urinaria / íleo paralítico</li>
+          <li>Apnea / insuficiencia respiratoria (C3–C5)</li>
+          <li>Priapismo</li>
+          <li>Dolor a la palpación vertebral</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Imágenes</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Estudio</th><th>Indicación principal</th><th>Ventajas / Limitaciones</th></tr></thead>
+        <tbody>
+          <tr><td><strong>TC columna</strong> (con reconstrucción)</td><td>Primera línea en politraumatizado. Evalúa fractura ósea, alineación, compromiso del canal.</td><td>Rápida, disponible. No evalúa tejido nervioso.</td></tr>
+          <tr><td><strong>RMN columna</strong></td><td>Mayor valor pronóstico. Evalúa daño medular, compresión disco-ligamentaria, edema y hemorragia; útil para planificación quirúrgica. <em>No debe demorar estabilización ni descompresión urgente si la indicación quirúrgica es clara.</em></td><td>En politrauma: TC primero; RMN diferida tras consulta con especialista según severidad (WSES/EANS 2024).</td></tr>
+          <tr><td><strong>RX columna</strong></td><td>Primera aproximación si no hay TC. Hoy reemplazada por TC en centros con recursos.</td><td>Limitada para fracturas sutiles y columna cervical baja.</td></tr>
+          <tr><td><strong>DWI medular</strong></td><td>Útil para diferenciar lesión isquémica de traumática. No siempre disponible.</td><td>Positiva en ~50% de los infartos medulares.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-info">
+      <strong>Perlas de imagen</strong>
+      La RMN debe incluir secuencias T1, T2, STIR, y con gadolinio. La señal T2 intramedular (edema/contusión) es el predictor más importante del pronóstico neurológico. La hemorragia intramedular (hipointensidad T2) se asocia a peor pronóstico.
+    </div>
+  </div>
+
+  <!-- Clasificación ASIA -->
+  <div class="sub-content" id="t-cls">
+
+    <!-- ACORDEÓN STYLES (scoped inline) -->
+    <style>
+      .accord { border: 1px solid var(--border); border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+      .accord summary {
+        padding: 13px 16px; cursor: pointer; font-weight: 600; font-size: 14px;
+        background: var(--surface2); color: var(--text); list-style: none;
+        display: flex; align-items: center; gap: 10px; user-select: none;
+      }
+      .accord summary::-webkit-details-marker { display: none; }
+      .accord summary::after { content: '›'; margin-left: auto; font-size: 18px; transition: transform 0.2s; }
+      .accord[open] summary::after { transform: rotate(90deg); }
+      .accord[open] summary { border-bottom: 1px solid var(--border); }
+      .accord-body { padding: 16px; background: var(--surface); }
+      .accord-icon { font-size: 16px; }
+      [data-theme="trauma"] .accord summary:hover { background: rgba(59,130,246,0.08); }
+    </style>
+
+    <p style="font-size:12px;color:var(--text-dim);margin-bottom:14px;">
+      Fuente primaria: <a href="https://asia-spinalinjury.org/international-standards-neurological-classification-sci-isncsci-worksheet/" target="_blank" style="color:var(--accent2);">ASIA/ISCoS International Standards 2019</a>
+    </p>
+
+    <!-- 1. QUÉ ES -->
+    <details class="accord" open>
+      <summary><span class="accord-icon">📖</span> ¿Qué es ASIA / ISNCSCI / AIS?</summary>
+      <div class="accord-body">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-label">Organización</div>
+            <h4>ASIA</h4>
+            <p><em>American Spinal Injury Association.</em> La institución que desarrolla y publica los estándares internacionales de clasificación de LMT. En conjunto con ISCoS (International Spinal Cord Society) mantiene las versiones actualizadas.</p>
+          </div>
+          <div class="card">
+            <div class="card-label">El instrumento</div>
+            <h4>ISNCSCI</h4>
+            <p><em>International Standards for Neurological Classification of Spinal Cord Injury.</em> El examen neurológico estandarizado que evalúa motor, sensitivo y función sacra. Genera scores numéricos y permite clasificar cualquier LMT de forma reproducible entre observadores.</p>
+          </div>
+          <div class="card">
+            <div class="card-label">La escala</div>
+            <h4>AIS</h4>
+            <p><em>ASIA Impairment Scale.</em> La clasificación A–E que surge de aplicar el ISNCSCI. Define si la lesión es completa (A) o incompleta (B–E) y el grado de preservación funcional. Es la métrica de desenlace universal en ensayos clínicos de LMT.</p>
+          </div>
+        </div>
+        <div class="alert alert-info" style="margin-top:12px">
+          <strong>Relación entre los tres</strong>
+          ASIA (organización) publica el ISNCSCI (examen) → el examen genera el NLI y el AIS (clasificación). En la práctica clínica se usan como sinónimos pero técnicamente son tres cosas distintas.
+        </div>
+      </div>
+    </details>
+
+    <!-- 2. COMPONENTES -->
+    <details class="accord">
+      <summary><span class="accord-icon">🔬</span> Componentes del examen</summary>
+      <div class="accord-body">
+        <div class="two-col">
+          <div>
+            <h3>Score Motor — Escala MRC (0–5)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Puntaje</th><th>Significado</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>0</strong></td><td>Parálisis total — sin contracción visible ni palpable</td></tr>
+                  <tr><td><strong>1</strong></td><td>Contracción visible o palpable sin movimiento articular</td></tr>
+                  <tr><td><strong>2</strong></td><td>Movimiento activo, elimina gravedad pero no la vence (en plano horizontal)</td></tr>
+                  <tr><td><strong>3</strong></td><td>Movimiento activo contra gravedad, sin resistencia adicional</td></tr>
+                  <tr><td><strong>4</strong></td><td>Movimiento activo contra resistencia moderada</td></tr>
+                  <tr><td><strong>5</strong></td><td>Fuerza normal contra resistencia máxima</td></tr>
+                  <tr><td><strong>NT</strong></td><td>No testeable (dolor, inmovilización, amputación, etc.)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:12px;color:var(--text-dim);margin-top:8px">Solo se evalúan los <strong>10 músculos clave</strong>. T2–L1 no tienen representación motora — en esa región el nivel se determina exclusivamente por sensitiva. Posición estándar: <strong>decúbito supino</strong>.</p>
+          </div>
+          <div>
+            <h3>Score Sensitivo — LT y PP (0–2)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Puntaje</th><th>LT (Light Touch)</th><th>PP (Pin Prick)</th></tr></thead>
+                <tbody>
+                  <tr><td><strong>0</strong></td><td>No siente nada</td><td>No distingue punta de romo</td></tr>
+                  <tr><td><strong>1</strong></td><td>Siente, pero diferente a la cara (↑↓ o disestesia)</td><td>Distingue punta/romo, pero distinto a la cara</td></tr>
+                  <tr><td><strong>2</strong></td><td>Igual que en la cara — normal</td><td>Igual que en la cara — normal</td></tr>
+                  <tr><td><strong>NT</strong></td><td colspan="2">No testeable</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="info-block" style="margin-top:10px">
+              <h4>📌 La cara como referencia — regla clave</h4>
+              <p>Antes de iniciar el examen se demuestra el estímulo en la cara del paciente (C1, no se puntúa). Esto establece el "2" — la referencia de normalidad. <strong>Sin este paso el puntaje 1 vs 2 no tiene sentido clínico.</strong></p>
+              <ul style="margin-top:6px">
+                <li><strong>LT:</strong> mota de algodón, toque mínimo sin frotar — activa solo mecanorreceptores de tacto fino</li>
+                <li><strong>PP:</strong> pin de seguridad o dispositivo específico — <strong>no aguja hipodérmica</strong>. Alternar punta y romo; el paciente debe distinguirlos con ojos cerrados</li>
+              </ul>
+            </div>
+            <h3 style="margin-top:12px">Función Sacra — binaria (presente/ausente)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Componente</th><th>Cómo se evalúa</th><th>Qué determina</th></tr></thead>
+                <tbody>
+                  <tr><td>Sensibilidad perianal (LT + PP)</td><td>Tacto y pinchazo en unión mucocutánea anal</td><td>Sensitivo S4–S5</td></tr>
+                  <tr><td>Presión anal profunda (DAP)</td><td>Presión con dedo enguantado en recto</td><td>Sensitivo profundo sacro</td></tr>
+                  <tr><td>Contracción anal voluntaria (VAC)</td><td>Se pide contraer el esfínter anal</td><td>Motor sacro</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p style="font-size:12px;color:var(--text-dim);margin-top:6px">Cualquier preservación sacra = lesión <strong>incompleta</strong>. La VAC no suma al score motor — se registra como presente/ausente.</p>
+          </div>
+        </div>
+
+        <div class="info-block" style="margin-top:14px">
+          <h4>📊 Scores totales y máximos</h4>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Score</th><th>Derecho</th><th>Izquierdo</th><th>Total máximo</th></tr></thead>
+              <tbody>
+                <tr><td>Motor MMSS (UEMS)</td><td>25</td><td>25</td><td><strong>50</strong></td></tr>
+                <tr><td>Motor MMII (LEMS)</td><td>25</td><td>25</td><td><strong>50</strong></td></tr>
+                <tr><td><strong>Motor total</strong></td><td>—</td><td>—</td><td><strong>100</strong></td></tr>
+                <tr><td>Light Touch (LT)</td><td>56</td><td>56</td><td><strong>112</strong></td></tr>
+                <tr><td>Pin Prick (PP)</td><td>56</td><td>56</td><td><strong>112</strong></td></tr>
+                <tr><td><strong>Sensitivo total</strong></td><td>—</td><td>—</td><td><strong>224</strong></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 3. MÚSCULOS CLAVE -->
+    <details class="accord">
+      <summary><span class="accord-icon">💪</span> Los 10 músculos clave</summary>
+      <div class="accord-body">
+        <div class="two-col">
+          <div>
+            <h3>UEMS — Extremidades superiores (C5–T1)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Nivel</th><th>Músculo</th><th>Cómo se testea</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="tag tag-blue">C5</span></td><td>Flexores de codo (bíceps, braquial)</td><td>Flexión del codo con antebrazo en supinación desde posición neutra</td></tr>
+                  <tr><td><span class="tag tag-blue">C6</span></td><td>Extensores de muñeca (ECRL, ECRB)</td><td>Extensión de muñeca contra resistencia, dedos en reposo</td></tr>
+                  <tr><td><span class="tag tag-blue">C7</span></td><td>Extensores de codo (tríceps)</td><td>Extensión del codo desde 90° de flexión contra resistencia</td></tr>
+                  <tr><td><span class="tag tag-blue">C8</span></td><td>Flexores largos de dedos (FDP dedo medio)</td><td>Flexión de falange distal del 3° dedo con la proximal fija</td></tr>
+                  <tr><td><span class="tag tag-blue">T1</span></td><td>Abductor del 5° dedo (ADM)</td><td>Abducción del meñique en el plano de la mano</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <h3>LEMS — Extremidades inferiores (L2–S1)</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Nivel</th><th>Músculo</th><th>Cómo se testea</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="tag tag-green">L2</span></td><td>Flexores de cadera (iliopsoas)</td><td>Flexión de cadera con rodilla flexionada en decúbito supino</td></tr>
+                  <tr><td><span class="tag tag-green">L3</span></td><td>Extensores de rodilla (cuádriceps)</td><td>Extensión de rodilla desde 90° de flexión</td></tr>
+                  <tr><td><span class="tag tag-green">L4</span></td><td>Dorsiflexores de tobillo (tibial anterior)</td><td>Dorsiflexión del pie contra resistencia</td></tr>
+                  <tr><td><span class="tag tag-green">L5</span></td><td>Extensores del hallux (EHL)</td><td>Extensión del dedo gordo contra resistencia sobre la uña</td></tr>
+                  <tr><td><span class="tag tag-green">S1</span></td><td>Flexores plantares (gastrocnemio, sóleo)</td><td>Flexión plantar del pie contra resistencia</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-warning" style="margin-top:12px">
+          <strong>T2–L1: sin representación en el score motor</strong>
+          No existen músculos suficientemente segmento-específicos para T2–L1. En esta región el nivel neurológico se determina <strong>exclusivamente por la sensitiva</strong>. Los campos de motor quedan vacíos o NT en la grilla ISNCSCI para esos niveles.
+        </div>
+        <div class="info-block" style="margin-top:10px">
+          <h4>¿Por qué estos 10 y no otros?</h4>
+          <ul>
+            <li><strong>Representatividad segmentaria:</strong> cada uno está inervado predominantemente por un nivel, con mínima superposición con el segmento adyacente</li>
+            <li><strong>Testeabilidad en agudo:</strong> evaluables en decúbito supino, sin movilizar al paciente, incluso con collar cervical</li>
+            <li><strong>Reproducibilidad:</strong> mayor concordancia interobservador en la literatura vs otros grupos musculares</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- 4. DERMATOMAS -->
+    <details class="accord">
+      <summary><span class="accord-icon">🗺️</span> Puntos sensitivos por dermatoma (LT y PP)</summary>
+      <div class="accord-body">
+        <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px">Se evalúan <strong>28 dermatomas bilateralmente</strong>. El punto anatómico es fijo y estandarizado — siempre el mismo punto, no el área general del dermatoma.</p>
+        <div class="two-col">
+          <div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Nivel</th><th>Punto anatómico exacto</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="tag tag-blue">C2</span></td><td>Protuberancia occipital, 1 cm lateral a la línea media</td></tr>
+                  <tr><td><span class="tag tag-blue">C3</span></td><td>Fosa supraclavicular, línea media clavicular</td></tr>
+                  <tr><td><span class="tag tag-blue">C4</span></td><td>Sobre la articulación acromioclavicular</td></tr>
+                  <tr><td><span class="tag tag-blue">C5</span></td><td>Cara lateral del pliegue del codo (fosa antecubital lateral)</td></tr>
+                  <tr><td><span class="tag tag-blue">C6</span></td><td>Pulgar — superficie dorsal de la falange proximal</td></tr>
+                  <tr><td><span class="tag tag-blue">C7</span></td><td>Dedo medio — superficie dorsal de la falange proximal</td></tr>
+                  <tr><td><span class="tag tag-blue">C8</span></td><td>Dedo meñique — superficie dorsal de la falange proximal</td></tr>
+                  <tr><td><span class="tag tag-blue">T1</span></td><td>Cara medial del pliegue del codo (fosa antecubital medial)</td></tr>
+                  <tr><td><span class="tag tag-gray">T2</span></td><td>Fosa axilar, ápex</td></tr>
+                  <tr><td><span class="tag tag-gray">T3</span></td><td>3° espacio intercostal, línea medioclavicular</td></tr>
+                  <tr><td><span class="tag tag-gray">T4</span></td><td>4° espacio intercostal (nivel del pezón), línea medioclavicular</td></tr>
+                  <tr><td><span class="tag tag-gray">T5</span></td><td>5° espacio intercostal, línea medioclavicular</td></tr>
+                  <tr><td><span class="tag tag-gray">T6</span></td><td>6° espacio intercostal (nivel apéndice xifoides), línea medioclavicular</td></tr>
+                  <tr><td><span class="tag tag-gray">T7</span></td><td>7° espacio intercostal, línea medioclavicular</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Nivel</th><th>Punto anatómico exacto</th></tr></thead>
+                <tbody>
+                  <tr><td><span class="tag tag-gray">T8</span></td><td>8° espacio intercostal, línea medioclavicular</td></tr>
+                  <tr><td><span class="tag tag-gray">T9</span></td><td>9° espacio intercostal, línea medioclavicular</td></tr>
+                  <tr><td><span class="tag tag-gray">T10</span></td><td>10° espacio intercostal (nivel del ombligo)</td></tr>
+                  <tr><td><span class="tag tag-gray">T11</span></td><td>11° espacio intercostal, línea medioclavicular</td></tr>
+                  <tr><td><span class="tag tag-gray">T12</span></td><td>Ligamento inguinal, punto medio</td></tr>
+                  <tr><td><span class="tag tag-green">L1</span></td><td>Mitad entre T12 y L2 (zona inguinal superior)</td></tr>
+                  <tr><td><span class="tag tag-green">L2</span></td><td>Cara anterior del muslo, punto medio entre L1 y L3</td></tr>
+                  <tr><td><span class="tag tag-green">L3</span></td><td>Cóndilo femoral medial, por encima de la rodilla</td></tr>
+                  <tr><td><span class="tag tag-green">L4</span></td><td>Maléolo medial</td></tr>
+                  <tr><td><span class="tag tag-green">L5</span></td><td>Dorso del pie, 3° articulación metatarsofalángica</td></tr>
+                  <tr><td><span class="tag tag-amber">S1</span></td><td>Cara lateral del talón</td></tr>
+                  <tr><td><span class="tag tag-amber">S2</span></td><td>Fosa poplítea, punto medio</td></tr>
+                  <tr><td><span class="tag tag-amber">S3</span></td><td>Tuberosidad isquiática</td></tr>
+                  <tr><td><span class="tag tag-amber">S4–S5</span></td><td>Área perianal (zona, no punto único) — unión mucocutánea anal</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="alert alert-warning" style="margin-top:12px">
+          <strong>Error frecuente — presión excesiva con el algodón</strong>
+          Un toque demasiado firme activa receptores de presión además de los de tacto fino, generando falso positivo (puntaje 2 cuando debería ser 1 o 0). El algodón debe apenas rozar la piel.
+        </div>
+      </div>
+    </details>
+
+    <!-- 5. CÁLCULO NLI -->
+    <details class="accord">
+      <summary><span class="accord-icon">📐</span> Cómo se calcula el NLI</summary>
+      <div class="accord-body">
+        <div class="two-col">
+          <div class="info-block">
+            <h4>Definición</h4>
+            <p>El <strong>NLI (Neurological Level of Injury)</strong> es el segmento medular más caudal con función motora <em>y</em> sensitiva <strong>normal bilateralmente</strong>.</p>
+            <p style="margin-top:8px">Se determinan 4 niveles parciales de forma independiente:</p>
+            <ul style="margin-top:6px">
+              <li>Nivel motor derecho</li>
+              <li>Nivel motor izquierdo</li>
+              <li>Nivel sensitivo derecho (LT + PP)</li>
+              <li>Nivel sensitivo izquierdo (LT + PP)</li>
+            </ul>
+            <p style="margin-top:8px">El <strong>NLI final = el más rostral</strong> de los 4.</p>
+          </div>
+          <div class="info-block">
+            <h4>Regla del nivel motor</h4>
+            <p>El nivel motor es el miotoma más caudal con fuerza <strong>≥3/5</strong>, <em>siempre que el segmento inmediatamente superior sea 5/5</em>.</p>
+            <p style="margin-top:8px"><strong>Ejemplo:</strong></p>
+            <ul>
+              <li>C5: 5/5 ✓</li>
+              <li>C6: 5/5 ✓</li>
+              <li>C7: 3/5 ← nivel motor</li>
+              <li>C8: 1/5</li>
+            </ul>
+            <p style="margin-top:8px">Si el segmento superior es &lt;5/5, el nivel motor sube un escalón más.</p>
+          </div>
+        </div>
+
+        <h3 style="margin-top:14px">Ejemplo completo de cálculo</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Componente</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td>Nivel motor derecho</td><td>C6 (fuerza ≥3 en C6, C5 es 5/5)</td></tr>
+              <tr><td>Nivel motor izquierdo</td><td>C7 (fuerza ≥3 en C7, C6 es 5/5)</td></tr>
+              <tr><td>Nivel sensitivo derecho</td><td>C5 (alterado desde C6)</td></tr>
+              <tr><td>Nivel sensitivo izquierdo</td><td>C6 (alterado desde C7)</td></tr>
+              <tr><td><strong>NLI final</strong></td><td><strong>C5</strong> — el más rostral de los 4</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="info-block" style="margin-top:12px">
+          <h4>🗺️ Zonas de Preservación Parcial (ZPP)</h4>
+          <p>Solo aplican en <strong>AIS A</strong>. Son los segmentos por debajo del NLI donde hay alguna función motora o sensitiva parcial, sin llegar a S4–S5. Se registran por separado para motor y sensitivo, en cada hemicuerpo.</p>
+          <p style="margin-top:6px"><em>Ejemplo: NLI C5 AIS A, con algo de sensitiva hasta T2 derecho → ZPP sensitiva derecha = T2.</em></p>
+          <div class="pill-row" style="margin-top:6px">
+            <span class="tag tag-gray">Solo en AIS A</span>
+            <span class="tag tag-gray">Motor y sensitivo por separado</span>
+            <span class="tag tag-gray">Derecho e izquierdo por separado</span>
+          </div>
+        </div>
+
+        <div class="alert alert-danger" style="margin-top:12px">
+          <strong>⚠ Error frecuente — celdas vacías ≠ NT</strong>
+          Si dejás celdas en blanco en la herramienta digital, el algoritmo las interpreta como <strong>0</strong> (ausencia de función), no como NT. Esto puede generar un NLI artificialmente alto (ej. C1) aunque el paciente tenga función preservada. Siempre completar todos los campos o marcar explícitamente como NT.
+        </div>
+      </div>
+    </details>
+
+    <!-- 6. FLUJO AIS -->
+    <details class="accord">
+      <summary><span class="accord-icon">🔄</span> Flujo diagnóstico → AIS</summary>
+      <div class="accord-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Paso</th><th>Pregunta</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>¿Hay función motora o sensitiva en S4–S5? (sensibilidad perianal, DAP, VAC)</td>
+                <td>No → <span class="tag tag-red">AIS A</span> (completa)</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>Si hay preservación sacra: ¿hay función motora por debajo del NLI?</td>
+                <td>No → <span class="tag tag-amber">AIS B</span> (sensitiva incompleta)</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Si hay motor: ¿más del 50% de los músculos clave tienen fuerza &lt;3/5?</td>
+                <td>Sí → <span class="tag tag-amber">AIS C</span> (motora incompleta débil)</td>
+              </tr>
+              <tr>
+                <td><strong>4</strong></td>
+                <td>Si no: ¿≥50% de los músculos clave tienen fuerza ≥3/5?</td>
+                <td>Sí → <span class="tag tag-green">AIS D</span> (motora incompleta funcional)</td>
+              </tr>
+              <tr>
+                <td><strong>5</strong></td>
+                <td>¿Motor y sensitivo completamente normales en paciente con lesión previa?</td>
+                <td>Sí → <span class="tag tag-green">AIS E</span> (normal)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="info-block" style="margin-top:12px">
+          <h4>Sobre la asimetría derecha / izquierda</h4>
+          <p>El reporte ISNCSCI muestra niveles separados para cada hemicuerpo. La asimetría es la norma, no la excepción. El reporte completo incluye:</p>
+          <ul style="margin-top:6px">
+            <li>Nivel motor derecho / izquierdo</li>
+            <li>Nivel sensitivo derecho / izquierdo</li>
+            <li>NLI único (el más rostral)</li>
+            <li>AIS único</li>
+            <li>ZPP motora derecha / izquierda (solo AIS A)</li>
+            <li>ZPP sensitiva derecha / izquierda (solo AIS A)</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+
+    <!-- 7. TABLA AIS -->
+    <details class="accord" open>
+      <summary><span class="accord-icon">📊</span> Escala AIS A–E — Definición y pronóstico</summary>
+      <div class="accord-body">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:120px">Grado AIS</th>
+            <th>Definición</th>
+            <th>Claves clínicas</th>
+            <th>Pronóstico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-red" style="font-size:13px;font-weight:700">A</span><br><span style="font-size:12px">Completa</span></td>
+            <td>Sin función motora ni sensitiva en segmentos sacros S4–S5. Ausencia de sensibilidad perianal, presión anal profunda y contracción anal voluntaria.</td>
+            <td>"Completa" se refiere a la ausencia de preservación sacra, <strong>no</strong> a que todo el cuerpo esté sin función. Pueden existir zonas de preservación parcial (ZPP) por encima del nivel sacro. El examen de S4–S5 es determinante: un paciente aparentemente A con sensibilidad perianal es en realidad B.</td>
+            <td>Limitada. ~15–25% convierten a B/C en 1 año, especialmente con cirugía temprana.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-amber" style="font-size:13px;font-weight:700">B</span><br><span style="font-size:12px">Sensitiva incompleta</span></td>
+            <td>Función sensitiva preservada por debajo del NLI, incluyendo S4–S5. Sin función motora útil más allá de 3 niveles bajo el NLI.</td>
+            <td>El paciente <strong>siente pero no mueve</strong>. La preservación sensitiva sacra indica que las vías más largas no están completamente interrumpidas, abriendo una "ventana biológica" para recuperación motora. Diferencia con A: presencia de cualquier sensibilidad en S4–S5.</td>
+            <td>~54% recuperan función motora ambulatoria al año.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-amber" style="font-size:13px;font-weight:700">C</span><br><span style="font-size:12px">Motora incompleta</span></td>
+            <td>Función motora presente debajo del NLI, pero <strong>&gt;50% de los músculos clave con fuerza &lt;3/5</strong> — no vencen la gravedad.</td>
+            <td>Hay actividad motora presente pero insuficiente para funciones antigravitatorias. Diferencia con B: hay movimiento. Diferencia con D: esa fuerza no alcanza para vencer gravedad en la mayoría de los músculos evaluados. Progresa frecuentemente a D con rehabilitación intensiva.</td>
+            <td>Variable. Muchos progresan a D. Deambulación con asistencia en buena parte de los casos.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green" style="font-size:13px;font-weight:700">D</span><br><span style="font-size:12px">Motora incompleta</span></td>
+            <td>Función motora debajo del NLI con <strong>≥50% de los músculos clave con fuerza ≥3/5</strong> — vencen la gravedad o resisten carga.</td>
+            <td>Es el grado de mayor potencial ambulatorio. La fuerza ≥3/5 implica movimiento contra gravedad, lo que es funcionalmente significativo. Grupo que más se beneficia de cirugía temprana y rehabilitación intensiva. Diferencia con C: mayoría de músculos son antigravitacionales.</td>
+            <td>La mayoría logra deambulación independiente o con asistencia mínima.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green" style="font-size:13px;font-weight:700">E</span><br><span style="font-size:12px">Normal</span></td>
+            <td>Función sensitiva y motora completamente normal en todos los segmentos evaluados.</td>
+            <td>Se asigna <strong>solo</strong> si el paciente previamente tuvo déficits documentados y se recuperó. No aplica a quien nunca tuvo lesión. En práctica clínica es raro; indica recuperación neurológica completa.</td>
+            <td>Excelente.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="info-block" style="margin-top:14px">
+      <h4>🔑 Diferencias clave entre grados adyacentes</h4>
+      <ul>
+        <li><strong>A → B:</strong> presencia de cualquier sensibilidad en S4–S5 (perianal, presión anal profunda)</li>
+        <li><strong>B → C:</strong> presencia de función motora por debajo del NLI (cualquier movimiento voluntario)</li>
+        <li><strong>C → D:</strong> si ≥50% de los músculos clave alcanzan fuerza ≥3/5 (antigravitacional)</li>
+        <li><strong>D → E:</strong> normalización completa de motor y sensitivo en paciente con lesión previa documentada</li>
+      </ul>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-dim)">Por esto el examen de S4–S5 es crítico al ingreso: un paciente que parece AIS A pero tiene sensibilidad perianal es en realidad AIS B, con pronóstico y manejo completamente diferentes.</p>
+    </div>
+      </div>
+    </details>
+
+    <!-- 8. SÍNDROMES INCOMPLETOS -->
+    <details class="accord">
+      <summary><span class="accord-icon">🧩</span> Síndromes Medulares Incompletos</summary>
+      <div class="accord-body">
+        <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Central Cord Syndrome</div>
+        <h4>Síndrome de Cordón Central</h4>
+        <p>Más frecuente (~50% de incompletos). Déficit motor MMSS &gt; MMII. Asociado a hiperextensión en columna con estenosis previa. Mejor pronóstico para deambulación.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Brown-Séquard Syndrome</div>
+        <h4>Hemisección Medular</h4>
+        <p>Lesión ipsilateral: pérdida motora + sensibilidad propioceptiva. Contralateral: pérdida de dolor y temperatura. Mejor pronóstico de recuperación funcional.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Anterior Cord Syndrome</div>
+        <h4>Síndrome de Arteria Espinal Anterior</h4>
+        <p>Compromiso de tractos corticoespinal y espinotalámico. Preserva columnas posteriores (propiocepción). Peor pronóstico. Puede ser también isquémico.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Posterior Cord Syndrome</div>
+        <h4>Síndrome de Columnas Posteriores</h4>
+        <p>Pérdida de propiocepción, vibración y tacto discriminativo. Función motora y dolor conservados. Raro en trauma puro.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Conus / Cauda Equina</div>
+        <h4>Cono + Cola de Caballo</h4>
+        <p>Cono (L1–S5): mezcla neurona motora superior e inferior. Cauda equina (debajo L2): NMI pura, arreflexia, hipotonía, vejiga arrefléxica. Alta capacidad de recuperación.</p>
+      </div>
+      </div><!-- /card-grid -->
+      </div><!-- /accord-body -->
+    </details>
+
+  </div><!-- /sub-content t-cls -->
+  <div class="sub-content" id="t-tx">
+    <div class="alert alert-danger">
+      <strong>🚨 Prioridad: Estabilización + Neuroprotección + Cirugía temprana</strong>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--danger);color:var(--danger)">0h</div>
+        <h5>Fase prehospitalaria y sala de emergencias</h5>
+        <p>ABCDE. Inmovilización cervical. Evitar hipotensión e hipoxia. NO movilización inadecuada. Evaluación AIS inicial.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--accent3);color:var(--accent3)">1–6h</div>
+        <h5>Manejo hemodinámico — MAP Target</h5>
+        <p><strong>Guías AO Spine 2024:</strong> mantener MAP ≥75–80 mmHg (hasta 90–95 mmHg como límite superior). Evitar hipotensión activa. Vasopresores (noradrenalina) si es necesario. Duración: 5–7 días post-lesión.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--accent1);color:var(--accent1)">&lt;24h</div>
+        <h5>Descompresión quirúrgica temprana</h5>
+        <p><strong>Guías AO Spine 2024:</strong> cirugía dentro de las 24 horas se asocia a mejora significativa del AIS (RR 2.76; IC95% 1.60–4.98). <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10964895/" target="_blank">Fehlings CPG 2024</a> Más del doble de probabilidad de mejorar ≥2 <strong>grados AIS</strong> a los 6 meses. Considerar en AIS A–D con compresión demostrada.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--accent4);color:var(--accent4)">1–14d</div>
+        <h5>Medidas de soporte y prevención de complicaciones</h5>
+        <p>Prevención de TVP, manejo respiratorio, cuidados de piel, manejo vesical/intestinal, nutrición precoz, manejo del dolor, posicionamiento.</p>
+      </div>
+    </div>
+
+    <div class="two-col mb-16">
+      <div class="info-block">
+        <h4>💊 Corticoides — Metilprednisolona</h4>
+        <p>El uso de metilprednisolona IV es <strong>controvertido</strong> y no recomendado de manera rutinaria por las guías AO Spine 2024. <a class="cite-link" href="https://register.awmf.org/de/leitlinien/detail/030-070" target="_blank">S3-Leitlinie AWMF 2024</a> La evidencia de beneficio es débil y los efectos adversos son significativos (infección, hemorragia GI, hiperglucemia). Si se usa, el protocolo histórico es 30 mg/kg bolo + 5.4 mg/kg/h por 23–47h (dentro de las primeras 8h). Decisión individualizada.</p>
+        <div class="pill-row">
+          <span class="tag tag-red">No recomendación rutinaria</span>
+          <span class="tag tag-amber">Decisión caso a caso</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h4>🫀 Manejo Hemodinámico — MAP Target</h4>
+        <p>Las guías AO Spine 2024 sugieren mantener MAP ≥75–80 mmHg para mejorar la perfusión medular, evitando la elevación activa por encima de 90–95 mmHg. <a class="cite-link" href="https://journals.sagepub.com/doi/10.1177/21925682231202348" target="_blank">Global Spine J 2024</a> La duración recomendada es <strong>3–7 días según estabilidad clínica y contexto UCI</strong>. <em>Importante: se trata de una recomendación débil con evidencia de muy baja calidad — no existe protocolo hemodinámico universalmente validado.</em> En shock neurogénico, vasopresores (noradrenalina) son de primera línea junto a expansión de volumen.</p>
+        <div class="pill-row">
+          <span class="tag tag-blue">MAP ≥75–80 mmHg</span>
+          <span class="tag tag-amber">3–7 días según contexto</span>
+          <span class="tag tag-gray">Evidencia débil — Global Spine J 2024</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Manejo Respiratorio</h3>
+    <div class="info-block">
+      <p>Lesiones cervicales altas (C1–C4): alto riesgo de insuficiencia respiratoria por compromiso diafragmático. Lesiones C5–T6: compromiso de músculos intercostales. Evaluar: CVF, PIMAX, SatO2. Considerar intubación temprana si CVF &lt;1L o SatO2 ↓. Rehabilitación respiratoria: ejercicios de tos asistida, ventilación no invasiva. El retiro de ventilación mecánica es gradual y protocolizado.</p>
+    </div>
+
+    <div class="source-list">
+      <a class="source-chip" href="https://pubmed.ncbi.nlm.nih.gov/38526930/" target="_blank">AO Spine / Kwon BK et al. 2024</a>
+      <a class="source-chip" href="https://di.aerzteblatt.de/int/archive/article/247059" target="_blank">Dtsch Arztebl Int 2025</a>
+      <a class="source-chip" href="https://www.ncbi.nlm.nih.gov/books/NBK560721/" target="_blank">StatPearls/NCBI 2025</a>
+      <a class="source-chip" href="https://doi.org/10.1186/s13017-023-00525-4" target="_blank">WSES/EANS 2024</a>
+    </div>
+  </div>
+
+  <!-- Complicaciones -->
+  <div class="sub-content" id="t-cx">
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Cardiovascular</div>
+        <h4>Disreflexia Autonómica</h4>
+        <p>Emergencia en lesiones ≥T6. Estímulo nociceptivo sublesional → hipertensión severa (↑20–40 mmHg), cefalea, diaforesis, bradicardia. Causa más frecuente: vejiga distendida. Tratamiento: sentado, remover causa, nifedipino/nitropastos.</p>
+        <div class="pill-row"><span class="tag tag-red">Urgencia</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Pulmonar</div>
+        <h4>TVP y TEP</h4>
+        <p>Riesgo muy elevado en primeros 3 meses. Profilaxis con HBPM (inicio temprano si no hay contraindicación), dispositivos de compresión neumática, medias elásticas. Screening con eco Doppler en alto riesgo.</p>
+        <div class="pill-row"><span class="tag tag-amber">Alta prioridad</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Genitourinario</div>
+        <h4>Disfunción Vesical</h4>
+        <p>Fase aguda: vejiga arrefléxica → retención → catéter intermitente limpio (CIL). Fase crónica: hiperreflexia (lesiones suprasacras) vs arreflexia (lesiones sacras). Urología/urodinámica diferida.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Dermatológico</div>
+        <h4>Úlceras por Presión</h4>
+        <p>Complicación prevenible de altísimo impacto. Cambios posturales cada 2h, colchones especializados, evaluación nutricional, cuidados de piel. Estadificación NPUAP.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Dolor</div>
+        <h4>Dolor Neuropático Central</h4>
+        <p>Hasta 80% de pacientes con LMT. Puede ser at-level o below-level. Primera línea: gabapentinoides (pregabalina, gabapentina), duloxetina. Segunda línea: tramadol. Estimulación medular epidural en casos refractarios.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Musculoesquelético</div>
+        <h4>Espasticidad</h4>
+        <p>Frecuente en lesiones incompletas suprasacras. Puede ser funcional (mejora marcha) o discapacitante. Primera línea: baclofeno oral, tizanidina. Segunda: baclofeno intratecal, toxina botulínica, cirugía.</p>
+      </div>
+    </div>
+
+    <h3>Rehabilitación y Nuevas Terapias</h3>
+    <div class="info-block">
+      <p>La rehabilitación multidisciplinaria temprana es esencial para optimizar la recuperación funcional. Incluye: fisioterapia motora intensiva, terapia ocupacional, logopedia, psicología, trabajo social. <br><br>
+      <strong>Estimulación Espinal Epidural (EES):</strong> emerge como terapia prometedora para recuperación motora en lesiones incompletas e incluso completas. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10889415/" target="_blank">Chalif et al. 2024</a> Múltiples estudios 2024–2025 muestran restauración de movimiento voluntario post-EES en pacientes con LMT completa. Todavía en fase de investigación/centros especializados.</p>
+      <div class="pill-row">
+        <span class="tag tag-blue">EES — evidencia emergente 2024–2025</span>
+        <span class="tag tag-green">Rehabilitación precoz</span>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END TRAUMÁTICA -->
+
+
+<!-- ═══════════════════ INFLAMATORIA ═══════════════════ -->
+<div class="tab-content" id="tab-inflam" data-theme="inflam">
+  <div class="section-header">
+    <div class="section-icon">🔬</div>
+    <div>
+      <div class="section-title">Lesión Medular Inflamatoria / Mielitis</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">NMOSD · MOGAD · EM · Mielitis Transversa Idiopática · Guías NEMOS 2024</div>
+    </div>
+  </div>
+
+  <div class="sub-nav" role="tablist">
+    <button type="button" class="sub-btn active" data-sub="i-over" role="tab" aria-selected="true" onclick="switchSub('inflam','i-over')">Clasificación</button>
+    <button type="button" class="sub-btn" data-sub="i-dx" role="tab" aria-selected="false" onclick="switchSub('inflam','i-dx')">Diagnóstico</button>
+    <button type="button" class="sub-btn" data-sub="i-nmo" role="tab" aria-selected="false" onclick="switchSub('inflam','i-nmo')">NMOSD</button>
+    <button type="button" class="sub-btn" data-sub="i-mog" role="tab" aria-selected="false" onclick="switchSub('inflam','i-mog')">MOGAD</button>
+    <button type="button" class="sub-btn" data-sub="i-ms" role="tab" aria-selected="false" onclick="switchSub('inflam','i-ms')">EM / Otras</button>
+    <button type="button" class="sub-btn" data-sub="i-tx" role="tab" aria-selected="false" onclick="switchSub('inflam','i-tx')">Tratamiento Agudo</button>
+  </div>
+
+  <!-- Clasificación -->
+  <div class="sub-content active" id="i-over">
+    <div class="alert alert-info">
+      <strong>Concepto</strong>
+      La mielitis transversa (MT) es un trastorno inflamatorio focal de la médula espinal con disfunción motora, sensitiva y/o autonómica, bilateral aunque no necesariamente simétrica, con nivel sensitivo definido, progresión entre 4 horas y 21 días, y evidencia inflamatoria en LCR o RM — siempre tras excluir compresión medular. Abarca tanto formas completas como parciales (Transverse Myelitis Consortium Working Group, 2002). <a class="cite-link" href="https://pubmed.ncbi.nlm.nih.gov/12236201/" target="_blank">TM Consortium 2002</a>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Desmielinizante</div>
+        <h4>Enfermedades desmielinizantes</h4>
+        <ul>
+          <li><strong>NMOSD</strong> (AQP4-IgG): mielitis longitudinalmente extensa (≥3 segmentos)</li>
+          <li><strong>MOGAD</strong> (MOG-IgG): mielitis frecuentemente extensa, mejor pronóstico</li>
+          <li><strong>Esclerosis Múltiple</strong>: lesiones cortas (1–2 segmentos), posterolateral</li>
+          <li>CIS (Síndrome Clínicamente Aislado)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Autoinmune / Parainfecciosa</div>
+        <h4>Mediadas por sistema inmune</h4>
+        <ul>
+          <li>Mielitis transversa idiopática</li>
+          <li>Post-infecciosa (viral, bacteriana)</li>
+          <li>Post-vacunal</li>
+          <li>Paraneoplásica (anti-NMDA, anti-Hu, anti-Ri)</li>
+          <li>Sarcoidosis</li>
+          <li>Lupus / Sjögren / enfermedad mixta</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Infecciosa</div>
+        <h4>Mielitis infecciosa</h4>
+        <ul>
+          <li>VZV, CMV, EBV, HSV-1/2</li>
+          <li>Enterovirus (EV-D68, EV-A71)</li>
+          <li>HTLV-1 (paraparesia espástica tropical)</li>
+          <li>VIH (mielopatía vacuolar)</li>
+          <li>Treponema (tabes dorsal)</li>
+          <li>Borrelia (Lyme)</li>
+          <li>Schistosoma</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Perfil temporal</div>
+        <h4>Evolución clínica</h4>
+        <ul>
+          <li><strong>Hiperaguda (&lt;4h):</strong> pensar isquemia primero</li>
+          <li><strong>Aguda (4h–21d):</strong> desmielinizante, infecciosa</li>
+          <li><strong>Subaguda (21d–6sem):</strong> paraneoplásica, sarcoidosis</li>
+          <li><strong>Crónica (&gt;6sem):</strong> HTLV-1, deficiencias, neoplásico</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagnóstico -->
+  <div class="sub-content" id="i-dx">
+    <h3>Algoritmo Diagnóstico</h3>
+    <div class="alert alert-warning">
+      <p>El establecimiento de un diagnóstico definitivo en mielitis transversa requiere un análisis crítico de las características de RMN y LCR para descartar causas no inflamatorias. El perfil temporal, el examen motor inicial y la distribución lesional en RMN son los elementos que mejor distinguen la mielopatía inflamatoria de otras causas. <a class="cite-link" href="https://pubmed.ncbi.nlm.nih.gov/29196574/" target="_blank">Barreras 2018</a></p>
+    </div>
+    <div class="info-block">
+      <h4>🧲 RMN Medular — Claves Diagnósticas</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Hallazgo</th><th>Sugiere</th></tr></thead>
+          <tbody>
+            <tr><td>Lesión longitudinalmente extensa (≥3 segmentos)</td><td>NMOSD, MOGAD, sarcoidosis, vasculopathy</td></tr>
+            <tr><td>Lesión corta (1–2 segmentos), posterolateral</td><td>Esclerosis Múltiple</td></tr>
+            <tr><td>Localización central / afecta sustancia gris</td><td>Mielitis viral, mielopatía vascular</td></tr>
+            <tr><td>Señal T2 "ojo de búho" (bilateral simétrico)</td><td>MOGAD, mielitis virales</td></tr>
+            <tr><td>Captación periférica de gadolinio (anillo)</td><td>Absceso epidural, absceso intramedular</td></tr>
+            <tr><td>Realce en lápiz (pencil-like enhancement)</td><td>NMOSD, sarcoidosis</td></tr>
+            <tr><td>DWI positivo</td><td>Isquemia &gt; inflamación</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <h3>LCR — Panel recomendado</h3>
+    <div class="two-col">
+      <div class="info-block">
+        <h4>Análisis básico</h4>
+        <ul>
+          <li>Citología: pleocitosis linfocítica (inflamatorio)</li>
+          <li>Proteínas: moderadamente elevadas</li>
+          <li>Glucosa</li>
+          <li>Bandas oligoclonales (BOC): EM, sarcoidosis</li>
+          <li>Índice IgG / kappa free light chains (McDonald 2024 rev. 2025 — alternativa a BOC en ciertos escenarios, no criterio universal) <a class="cite-link" href="https://ectrims.eu/press/revisions-to-mcdonald-diagnostic-criteria-for-multiple-sclerosis-published/" target="_blank">ECTRIMS 2024</a></li>
+          <li>VDRL / TPHA en LCR</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>Biomarcadores específicos</h4>
+        <ul>
+          <li><strong>AQP4-IgG sérica:</strong> CBA viva (gold standard) — NMOSD</li>
+          <li><strong>MOG-IgG sérica:</strong> CBA fija o viva — MOGAD</li>
+          <li><strong>GFAP en LCR:</strong> marcador de astrocitopía — NMOSD</li>
+          <li>Panel paraneoplásico: Hu, Ri, CV2, anfifisina</li>
+          <li>NMDAR, CASPR2, GABA-B, AMPA</li>
+          <li>PCR viral: VZV, HSV, CMV, enterovirus, VIH</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Criterios Diagnósticos de Mielitis Transversa (Transverse Myelitis Consortium Working Group)</strong>
+      Disfunción sensomotora/autonómica bilateral (no necesariamente simétrica) · Nivel sensitivo definido · Progresión entre 4h y 21 días · Inflamación demostrada (LCR o realce con gadolinio) · Exclusión de compresión y etiología específica tratable
+    </div>
+  </div>
+
+  <!-- NMOSD -->
+  <div class="sub-content" id="i-nmo">
+    <div class="two-col">
+      <div class="info-block">
+        <h4>🔵 NMOSD — Criterios Diagnósticos IPND 2015</h4>
+        <p><strong>AQP4-IgG positivo:</strong> al menos 1 síntoma core (neuritis óptica, mielitis aguda, síndrome de área postrema, síndrome de tronco, narcolepsia/NMOSD diencefálica, síndrome cerebral NMOSD)</p>
+        <br>
+        <p><strong>AQP4-IgG negativo / desconocido:</strong> ≥2 síntomas core + criterios de RM + exclusión de diagnósticos alternativos</p>
+        <div class="pill-row">
+          <span class="tag tag-purple">Prevalencia: 1–5/100.000</span>
+          <span class="tag tag-purple">F:M = 9:1</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h4>📋 Presentación Clínica</h4>
+        <ul>
+          <li>Mielitis extensa (≥3 segmentos), bilateral</li>
+          <li>Neuritis óptica severa (unilateral o bilateral)</li>
+          <li>Síndrome de área postrema: náuseas y vómitos intratables, hipo incoercible</li>
+          <li>Síntomas diencefálicos (narcolepsia, hiponatremia)</li>
+          <li>Ataques recurrentes → discapacidad acumulativa</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Tratamiento NMOSD — Guías NEMOS 2024</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Ataque agudo — 1ª línea</div>
+        <h4>Metilprednisolona IV</h4>
+        <p>1000 mg/día IV × 3–5 días. Seguir con prednisona oral 1 mg/kg/día, reducción gradual a 10–15 mg/día en 2–3 semanas. <a class="cite-link" href="https://link.springer.com/article/10.1007/s00415-023-11910-z" target="_blank">NEMOS 2024</a></p>
+        <div class="pill-row"><span class="tag tag-purple">NEMOS 2024</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Ataque agudo — 2ª línea / sin respuesta</div>
+        <h4>Plasmaféresis (PLEX)</h4>
+        <p>5–7 sesiones en días alternos. Indicada en ataques severos o sin respuesta a corticoides. Iniciar temprano si no responde en 3–5 días. <a class="cite-link" href="https://link.springer.com/article/10.1007/s00415-023-11910-z" target="_blank">NEMOS 2024</a></p>
+        <div class="pill-row"><span class="tag tag-purple">Evidencia moderada</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Mantenimiento — AQP4+ (aprobados FDA/EMA)</div>
+        <h4>Biológicos de nueva generación</h4>
+        <ul>
+          <li><strong>Eculizumab</strong> (anti-C5)</li>
+          <li><strong>Inebilizumab</strong> (anti-CD19)</li>
+          <li><strong>Satralizumab</strong> (anti-IL-6R)</li>
+          <li><strong>Ravulizumab</strong> (anti-C5, longer-acting)</li>
+        </ul>
+        <div class="pill-row"><span class="tag tag-green">Alta eficacia</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Mantenimiento — opciones clásicas</div>
+        <h4>Inmunosupresores</h4>
+        <ul>
+          <li>Rituximab (anti-CD20) — muy usado</li>
+          <li>Azatioprina 2–3 mg/kg/día</li>
+          <li>Micofenolato mofetil 1–3 g/día</li>
+          <li>Tocilizumab (anti-IL-6R)</li>
+        </ul>
+        <div class="pill-row"><span class="tag tag-amber">Evidencia moderada</span></div>
+      </div>
+    </div>
+    <div class="alert alert-danger">
+      <strong>⚠ Importante:</strong> Interferón-beta y natalizumab están contraindicados en NMOSD AQP4+ — pueden empeorar la enfermedad. <a class="cite-link" href="https://link.springer.com/article/10.1007/s00415-023-11910-z" target="_blank">NEMOS 2024</a>
+    </div>
+  </div>
+
+  <!-- MOGAD -->
+  <div class="sub-content" id="i-mog">
+    <div class="two-col">
+      <div class="info-block">
+        <h4>🟣 MOGAD — Características diferenciales</h4>
+        <ul>
+          <li>Anticuerpos anti-MOG (glicoproteína asociada a mielina de oligodendrocitos)</li>
+          <li>Distribución equitativa entre sexos (vs NMOSD F:M 9:1)</li>
+          <li>Edad media ~35 años, pero cualquier edad</li>
+          <li>Diagnóstico por CBA (cell-based assay) en suero; LCR controversial <a class="cite-link" href="https://www.msard-journal.com/article/S2211-0348(25)00589-9/fulltext" target="_blank">Saudi Consensus 2025</a></li>
+          <li>Probar después de resolución del ataque agudo para confirmar</li>
+        </ul>
+        <div class="pill-row">
+          <span class="tag tag-purple">AQP4-IgG negativo</span>
+          <span class="tag tag-purple">MOG-IgG positivo</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h4>📋 Fenotipos clínicos</h4>
+        <ul>
+          <li>Neuritis óptica (±bilateral) — muy frecuente</li>
+          <li>Mielitis aguda (longitudinalmente extensa)</li>
+          <li>ADEM (encefalomielitis diseminada aguda)</li>
+          <li>Síndrome de área postrema (menos frecuente que NMOSD)</li>
+          <li>Cortical encephalitis (nuevo fenotipo reconocido)</li>
+          <li>Curso monofásico (~50%) o recurrente (~50%)</li>
+          <li>Mejor pronóstico funcional que NMOSD</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-block">
+      <h4>💊 Tratamiento MOGAD</h4>
+      <p><strong>Ataque agudo:</strong> metilprednisolona IV 1g/día × 3–5 días (igual que NMOSD). Plasmaféresis si no responde. IVIG puede ser alternativa válida en MOGAD (a diferencia de NMOSD AQP4+, donde no se recomienda como escalada estándar). <br><br>
+      <strong>Mantenimiento (evidencia limitada — no hay aprobados específicos):</strong></p>
+      <ul>
+        <li>Ciclos prolongados de corticoides orales en reducción lenta</li>
+        <li>Azatioprina, MMF, IVIG repetitivo, rituximab</li>
+        <li>No existe consenso sobre inicio de mantenimiento en primer episodio</li>
+      </ul>
+      <div class="pill-row">
+        <span class="tag tag-amber">Sin aprobaciones específicas FDA/EMA</span>
+        <span class="tag tag-purple">Evidencia creciente 2024–2025</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- EM / Otras -->
+  <div class="sub-content" id="i-ms">
+    <h3>Esclerosis Múltiple — Mielitis</h3>
+    <div class="info-block">
+      <h4>Características de mielitis en EM</h4>
+      <ul>
+        <li>Lesiones cortas (&lt;2 segmentos), lateralizadas, posterolaterales</li>
+        <li>Captación de gadolinio en fase aguda</li>
+        <li>Banda oligoclonales en LCR (85–95%)</li>
+        <li>Kappa free light chains (criterios McDonald 2024)</li>
+        <li>Diseminación en tiempo y espacio (DIS/DIT — McDonald 2017/2024)</li>
+        <li>Lesiones cerebrales/periventriculares en RMN cerebro</li>
+      </ul>
+      <div class="pill-row">
+        <span class="tag tag-blue">RMN cerebro obligatoria</span>
+        <span class="tag tag-blue">McDonald 2024 revisado</span>
+      </div>
+    </div>
+
+    <h3>Otras Mielitis Inflamatorias</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Paraneoplásica</div>
+        <h4>Mielitis Paraneoplásica</h4>
+        <p>Anti-Hu (SCLC), anti-Ri, anti-CV2, anti-anfifisina. Inicio subagudo. Buscar neoplasia activamente. Respuesta pobre a inmunoterapia. Oncoterapia puede mejorar.</p>
+        <div class="pill-row"><span class="tag tag-red">Buscar tumor</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Sarcoidosis</div>
+        <h4>Neurosarcoidosis Medular</h4>
+        <p>Granulomas no caseosos. Lesiones extensas, puede haber realce leptomeníngeo. SACE elevada (50%). Biopsia confirmatoria. Corticoides primera línea; metotrexato, infliximab en casos refractarios.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Reumatológica</div>
+        <h4>Mielopatía Lúpica / Sjögren</h4>
+        <p>LES: mielitis transversa puede ser la presentación inicial. APLA asociado. Sjögren: neuromielitis óptica-like (AQP4+ en algunos). Tratar la enfermedad de base + inmunosupresión.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Infecciosa</div>
+        <h4>Mielitis Viral</h4>
+        <p>VZV, HSV-2 (mielorradiculitis de Elsberg), enterovirus D68/A71 (mielitis aguda flácida — MAF). CMV en inmunocomprometidos. Aciclovir/ganciclovir según agente.</p>
+        <div class="pill-row"><span class="tag tag-red">MAF — EV-D68 emergente</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tratamiento Agudo -->
+  <div class="sub-content" id="i-tx">
+    <div class="alert alert-info">
+      <strong>Principio general:</strong> Tratar la causa si se identifica; si no, inicio temprano de inmunoterapia empírica.
+    </div>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--tab-inflam);color:var(--tab-inflam)">1</div>
+        <h5>Descartar compresión y causas tratables</h5>
+        <p>RMN medular urgente. PL. Panel infeccioso. Anticuerpos AQP4/MOG séricos.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--tab-inflam);color:var(--tab-inflam)">2</div>
+        <h5>Primera línea: Metilprednisolona IV</h5>
+        <p>1g/día × 3–5 días IV. Iniciar lo antes posible ante sospecha de mielitis inflamatoria. Monitorear glucemia, infección, presión arterial.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--tab-inflam);color:var(--tab-inflam)">3</div>
+        <h5>Sin respuesta (3–5 días): PLEX (Plasmaféresis)</h5>
+        <p>5–7 sesiones. Evidencia en enfermedades desmielinizantes y mielitis inflamatoria. Considerar en ataques severos desde el inicio en NMOSD.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot" style="border-color:var(--tab-inflam);color:var(--tab-inflam)">4</div>
+        <h5>Escalada o casos refractarios</h5>
+        <p><strong>IVIG 2g/kg en 2–5 días:</strong> <em>no recomendada como escalada estándar en NMOSD AQP4+</em> (guías brasileñas 2025 y NEMOS) <a class="cite-link" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12602111/" target="_blank">Brasil 2025</a>; reservar para contexto MOGAD o mielitis idiopática sin respuesta. Ciclofosfamida IV en pulsos (800–1200 mg/m²) en casos muy graves refractarios. Decidir mantenimiento según etiología confirmada.</p>
+      </div>
+    </div>
+    <div class="info-block">
+      <h4>🔴 Rehab y pronóstico</h4>
+      <p>Aproximadamente un tercio de los pacientes con mielitis transversa se recupera completamente, un tercio tiene recuperación parcial, y un tercio queda con déficit severo. <a class="cite-link" href="https://www.msdmanuals.com/professional/neurologic-disorders/spinal-cord-disorders/acute-transverse-myelitis" target="_blank">MSD Manual</a> La velocidad de progresión es el principal predictor pronóstico: inicio hiperagudo = peor pronóstico. NMOSD sin tratamiento: alta recurrencia y discapacidad acumulativa. MOGAD: mejor pronóstico global.</p>
+    </div>
+    <div class="source-list">
+      <a class="source-chip" href="https://link.springer.com/article/10.1007/s00415-023-11910-z" target="_blank">NEMOS 2024 — J Neurol (Springer, fuente original)</a>
+      <a class="source-chip" href="https://doi.org/10.1212/WNL.0000000000201609" target="_blank">IPND 2015</a>
+      <a class="source-chip" href="https://wearesrna.org/living-with-myelitis/disease-information/transverse-myelitis/acute-treatments/" target="_blank">TM Consortium Working Group 2002 / NINDS</a>
+      <a class="source-chip" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12602111/" target="_blank">Brazilian NMOSD Guidelines 2025</a>
+      <a class="source-chip" href="https://www.emjreviews.com/neurology/congress-review/the-2024-revised-mcdonald-criteria-aan-2025-highlights-j310125/" target="_blank">McDonald 2024 revisions (implementación 2025)</a>
+    </div>
+  </div>
+</div>
+<!-- END INFLAMATORIA -->
+
+
+<!-- ═══════════════════ ISQUÉMICA ═══════════════════ -->
+<div class="tab-content" id="tab-isq" data-theme="isq">
+  <div class="section-header">
+    <div class="section-icon">🫀</div>
+    <div>
+      <div class="section-title">Lesión Medular Isquémica / Infarto Medular</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">Spinal Cord Infarction · Mielopatía Vascular · ISC AHA 2025</div>
+    </div>
+  </div>
+
+  <div class="sub-nav" role="tablist">
+    <button type="button" class="sub-btn active" data-sub="q-epi" role="tab" aria-selected="true" onclick="switchSub('isq','q-epi')">Epidemiología</button>
+    <button type="button" class="sub-btn" data-sub="q-vasc" role="tab" aria-selected="false" onclick="switchSub('isq','q-vasc')">Anatomía Vascular</button>
+    <button type="button" class="sub-btn" data-sub="q-clin" role="tab" aria-selected="false" onclick="switchSub('isq','q-clin')">Clínica</button>
+    <button type="button" class="sub-btn" data-sub="q-dx" role="tab" aria-selected="false" onclick="switchSub('isq','q-dx')">Diagnóstico</button>
+    <button type="button" class="sub-btn" data-sub="q-tx" role="tab" aria-selected="false" onclick="switchSub('isq','q-tx')">Tratamiento</button>
+  </div>
+
+  <!-- Epidemiología -->
+  <div class="sub-content active" id="q-epi">
+    <div class="alert alert-warning">
+      <strong>Entidad subestimada:</strong> El infarto medular representa el 1–2% de todos los ACV isquémicos y el 5–8% de las mielopatías agudas. Diagnosticado 100 veces menos frecuentemente que el ACV cerebral. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11304228/" target="_blank">Elshony 2024</a>
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Incidencia</div>
+        <h4>1–2% de ACV isquémicos</h4>
+        <p>5.7% de todas las mielopatías agudas. Mielopatía relacionada a isquemia: 14–18% de los pacientes con diagnóstico inicial de mielitis transversa (frecuente sobrediagnóstico de inflamatorio). <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11304228/" target="_blank">Elshony 2024</a></p>
+      </div>
+      <div class="card">
+        <div class="card-label">Epidemiología</div>
+        <h4>Pico 50–70 años</h4>
+        <p>Sin clara predilección por sexo. Factores de riesgo cardiovascular son los más comunes. 44–74% de los casos no tienen causa identificable.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Etiologías</div>
+        <h4>Causas principales</h4>
+        <ul>
+          <li>Aterosclerosis aórtica / disección aórtica</li>
+          <li>Hipotensión sistémica severa (PCR, cirugía aórtica)</li>
+          <li>Embolismo fibrocartilaginoso (núcleo pulposo)</li>
+          <li>Malformaciones arteriovenosas</li>
+          <li>Surfer's myelopathy (Valsalva + hiperextensión)</li>
+          <li>Vasculitis, hipercoagulabilidad</li>
+          <li>Iatrogénica: cirugía aórtica, cateterismo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Anatomía Vascular -->
+  <div class="sub-content" id="q-vasc">
+
+    <!-- DIAGRAM -->
+    <div style="margin-bottom:20px">
+      <svg width="100%" viewBox="0 0 680 570" role="img">
+        <title>AEA — zonas de vulnerabilidad isquémica medular</title>
+        <desc>Vista longitudinal y corte axial de la médula espinal mostrando territorios de la AEA, AEP y zonas watershed</desc>
+        <defs>
+          <marker id="arr-v" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+          <clipPath id="cc-v"><rect x="178" y="72" width="62" height="432" rx="6"/></clipPath>
+          <clipPath id="csc-v"><circle cx="557" cy="265" r="80"/></clipPath>
+        </defs>
+
+        <!-- ── BACKGROUND PANEL (toda la escena sobre fondo claro) ── -->
+        <rect x="0" y="0" width="680" height="570" fill="#f2efe8" rx="10"/>
+
+        <!-- ── PANEL DIVIDER ── -->
+        <line x1="418" y1="12" x2="418" y2="555" stroke="#c8c5bc" stroke-width="0.8" stroke-dasharray="5 4"/>
+
+        <!-- ════ PANEL IZQUIERDO — Vista longitudinal ════ -->
+
+        <!-- Título panel -->
+        <text x="200" y="22" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#2c2c2a">Vista longitudinal</text>
+
+        <!-- Arterias vertebrales -->
+        <path d="M128 48 Q148 60 178 74" fill="none" stroke="#1565C0" stroke-width="1.8" marker-end="url(#arr-v)"/>
+        <path d="M215 48 Q210 60 240 74" fill="none" stroke="#1565C0" stroke-width="1.8" marker-end="url(#arr-v)"/>
+        <text x="112" y="38" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1565C0">A. vertebral</text>
+        <text x="112" y="50" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1565C0">derecha</text>
+        <text x="232" y="38" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1565C0">A. vertebral</text>
+        <text x="232" y="50" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#1565C0">izquierda</text>
+
+        <!-- Zonas coloreadas (clipeadas a la médula) — colores sólidos más saturados -->
+        <!-- C1–C4: verde (baja vulnerabilidad) -->
+        <rect clip-path="url(#cc-v)" x="178" y="72"  width="62" height="50"  fill="#81C784"/>
+        <!-- C5–T1: gris azulado (moderada) -->
+        <rect clip-path="url(#cc-v)" x="178" y="122" width="62" height="53"  fill="#b0bec5"/>
+        <!-- T1–T4: ámbar (alta) -->
+        <rect clip-path="url(#cc-v)" x="178" y="175" width="62" height="38"  fill="#FFB300"/>
+        <!-- T4–T8: rojo/coral (watershed) -->
+        <rect clip-path="url(#cc-v)" x="178" y="213" width="62" height="55"  fill="#E53935"/>
+        <!-- T9–L2: teal (protegida Adamkiewicz) -->
+        <rect clip-path="url(#cc-v)" x="178" y="268" width="62" height="92"  fill="#26A69A"/>
+        <!-- L3–S: gris (cono/cauda) -->
+        <rect clip-path="url(#cc-v)" x="178" y="360" width="62" height="144" fill="#90A4AE"/>
+
+        <!-- Contorno médula -->
+        <rect x="178" y="72" width="62" height="432" rx="6" fill="none" stroke="#4a4745" stroke-width="1.5"/>
+
+        <!-- AEA — línea roja anterior (borde izquierdo médula) -->
+        <line x1="178" y1="72" x2="178" y2="504" stroke="#B71C1C" stroke-width="3" stroke-linecap="round"/>
+        <!-- AEP — línea verde posterior punteada (borde derecho) -->
+        <line x1="240" y1="72" x2="240" y2="504" stroke="#004D40" stroke-width="2" stroke-dasharray="5 3" stroke-linecap="round"/>
+
+        <!-- Marcadores de nivel -->
+        <line x1="168" y1="72"  x2="178" y2="72"  stroke="#4a4745" stroke-width="0.8"/>
+        <text x="164" y="76" text-anchor="end" font-family="sans-serif" font-size="11" font-weight="600" fill="#2c2c2a">C1</text>
+
+        <line x1="168" y1="122" x2="240" y2="122" stroke="#4a4745" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <text x="164" y="126" text-anchor="end" font-family="sans-serif" font-size="11" fill="#2c2c2a">C5</text>
+
+        <line x1="168" y1="175" x2="240" y2="175" stroke="#4a4745" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <text x="164" y="179" text-anchor="end" font-family="sans-serif" font-size="11" fill="#2c2c2a">T1</text>
+
+        <line x1="168" y1="213" x2="240" y2="213" stroke="#B71C1C" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <text x="164" y="217" text-anchor="end" font-family="sans-serif" font-size="11" font-weight="700" fill="#B71C1C">T4</text>
+
+        <line x1="168" y1="268" x2="240" y2="268" stroke="#B71C1C" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <text x="164" y="272" text-anchor="end" font-family="sans-serif" font-size="11" font-weight="700" fill="#B71C1C">T8</text>
+
+        <line x1="168" y1="360" x2="240" y2="360" stroke="#4a4745" stroke-width="0.5" stroke-dasharray="2 2"/>
+        <text x="164" y="364" text-anchor="end" font-family="sans-serif" font-size="11" fill="#2c2c2a">L2</text>
+
+        <line x1="168" y1="504" x2="178" y2="504" stroke="#4a4745" stroke-width="0.8"/>
+        <text x="164" y="508" text-anchor="end" font-family="sans-serif" font-size="11" fill="#2c2c2a">S5</text>
+
+        <!-- Arteria de Adamkiewicz -->
+        <path d="M52 302 L176 302" fill="none" stroke="#004D40" stroke-width="2" marker-end="url(#arr-v)"/>
+        <text x="92" y="291" text-anchor="middle" font-family="sans-serif" font-size="10" font-weight="600" fill="#004D40">Adamkiewicz</text>
+        <text x="92" y="303" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#004D40">(T9–L2 izq.)</text>
+        <circle cx="178" cy="302" r="3.5" fill="#004D40"/>
+
+        <!-- Etiquetas de zonas (derecha de la médula) -->
+        <line x1="240" y1="97"  x2="254" y2="97"  stroke="#4a4745" stroke-width="0.5"/>
+        <text x="258" y="94" font-family="sans-serif" font-size="11" font-weight="600" fill="#1B5E20">C1–C4</text>
+        <text x="258" y="106" font-family="sans-serif" font-size="10" fill="#2E7D32">Baja vulnerabilidad</text>
+
+        <line x1="240" y1="148" x2="254" y2="148" stroke="#4a4745" stroke-width="0.5"/>
+        <text x="258" y="152" font-family="sans-serif" font-size="11" fill="#37474F">C5–T1: moderada</text>
+
+        <line x1="240" y1="194" x2="254" y2="194" stroke="#4a4745" stroke-width="0.5"/>
+        <text x="258" y="191" font-family="sans-serif" font-size="11" font-weight="600" fill="#E65100">T1–T4</text>
+        <text x="258" y="203" font-family="sans-serif" font-size="10" fill="#E65100">Alta vulnerabilidad</text>
+
+        <line x1="240" y1="240" x2="254" y2="240" stroke="#4a4745" stroke-width="0.5"/>
+        <text x="258" y="234" font-family="sans-serif" font-size="12" font-weight="700" fill="#B71C1C">T4–T8  WATERSHED</text>
+        <text x="258" y="247" font-family="sans-serif" font-size="10" fill="#B71C1C">Zona más crítica</text>
+
+        <line x1="240" y1="314" x2="254" y2="314" stroke="#4a4745" stroke-width="0.5"/>
+        <text x="258" y="310" font-family="sans-serif" font-size="11" font-weight="600" fill="#004D40">T9–L2: protegida</text>
+        <text x="258" y="322" font-family="sans-serif" font-size="10" fill="#004D40">por Adamkiewicz</text>
+
+        <line x1="240" y1="425" x2="254" y2="425" stroke="#4a4745" stroke-width="0.5"/>
+        <text x="258" y="429" font-family="sans-serif" font-size="11" fill="#37474F">L3–S5: cono / cauda</text>
+
+        <!-- Etiquetas pie AEA / AEP -->
+        <text x="175" y="518" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#B71C1C">AEA</text>
+        <text x="243" y="518" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#004D40">AEP</text>
+
+        <!-- ════ PANEL DERECHO — Corte axial ════ -->
+
+        <!-- Título panel -->
+        <text x="557" y="22" text-anchor="middle" font-family="sans-serif" font-size="12" font-weight="600" fill="#2c2c2a">Corte axial — T6</text>
+        <text x="557" y="36" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#5f5e5a">Territorios de irrigación</text>
+
+        <!-- AEP (posterior — 1/3 superior) — teal claro -->
+        <circle cx="557" cy="265" r="80" fill="#80CBC4"/>
+        <!-- AEA (anterior — 2/3 inferior) — coral, clipeado -->
+        <rect clip-path="url(#csc-v)" x="477" y="238" width="160" height="107" fill="#EF9A9A"/>
+        <!-- Línea divisoria AEA / AEP -->
+        <line x1="477" y1="238" x2="637" y2="238" stroke="#4a4745" stroke-width="1"/>
+
+        <!-- Sustancia gris (mariposa) — color fijo visible: gris medio -->
+        <!-- Cuernos posteriores -->
+        <ellipse clip-path="url(#csc-v)" cx="538" cy="228" rx="12" ry="17" fill="#bdbdbd" stroke="#757575" stroke-width="0.8"/>
+        <ellipse clip-path="url(#csc-v)" cx="576" cy="228" rx="12" ry="17" fill="#bdbdbd" stroke="#757575" stroke-width="0.8"/>
+        <!-- Puente central -->
+        <ellipse clip-path="url(#csc-v)" cx="557" cy="253" rx="27" ry="12" fill="#bdbdbd" stroke="#757575" stroke-width="0.8"/>
+        <!-- Cuernos anteriores -->
+        <ellipse clip-path="url(#csc-v)" cx="538" cy="281" rx="18" ry="20" fill="#bdbdbd" stroke="#757575" stroke-width="0.8"/>
+        <ellipse clip-path="url(#csc-v)" cx="576" cy="281" rx="18" ry="20" fill="#bdbdbd" stroke="#757575" stroke-width="0.8"/>
+
+        <!-- Owl's eye — círculos naranjas en cuernos anteriores -->
+        <circle cx="538" cy="281" r="10" fill="#E65100" opacity="0.9"/>
+        <circle cx="576" cy="281" r="10" fill="#E65100" opacity="0.9"/>
+
+        <!-- Canal central -->
+        <circle cx="557" cy="253" r="3" fill="#757575"/>
+
+        <!-- Contorno médula -->
+        <circle cx="557" cy="265" r="80" fill="none" stroke="#4a4745" stroke-width="1.8"/>
+
+        <!-- Etiquetas del corte axial -->
+        <text x="557" y="358" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#B71C1C">▲ Anterior — AEA (2/3)</text>
+        <text x="557" y="163" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#004D40">▼ Posterior — AEP (1/3)</text>
+
+        <!-- Owl's eye anotación -->
+        <line x1="596" y1="281" x2="612" y2="281" stroke="#4a4745" stroke-width="0.6"/>
+        <text x="616" y="278" font-family="sans-serif" font-size="10" font-weight="600" fill="#E65100">Owl's eye</text>
+        <text x="616" y="290" font-family="sans-serif" font-size="10" fill="#5f5e5a">sign (AEA)</text>
+
+        <!-- Proporción izquierda -->
+        <line x1="477" y1="300" x2="460" y2="300" stroke="#4a4745" stroke-width="0.6"/>
+        <text x="456" y="303" text-anchor="end" font-family="sans-serif" font-size="10" font-weight="700" fill="#B71C1C">2/3 ant.</text>
+        <line x1="477" y1="200" x2="460" y2="200" stroke="#4a4745" stroke-width="0.6"/>
+        <text x="456" y="203" text-anchor="end" font-family="sans-serif" font-size="10" font-weight="700" fill="#004D40">1/3 post.</text>
+
+        <!-- ════ LEYENDA (pie) ════ -->
+        <rect x="12" y="535" width="656" height="28" fill="#e8e4dc" rx="6"/>
+        <rect x="22"  y="543" width="12" height="12" fill="#81C784" rx="2"/>
+        <text x="38" y="553" font-family="sans-serif" font-size="10" font-weight="600" fill="#1B5E20">Baja</text>
+        <rect x="72"  y="543" width="12" height="12" fill="#FFB300" rx="2"/>
+        <text x="88" y="553" font-family="sans-serif" font-size="10" font-weight="600" fill="#E65100">Alta</text>
+        <rect x="118" y="543" width="12" height="12" fill="#E53935" rx="2"/>
+        <text x="134" y="553" font-family="sans-serif" font-size="10" font-weight="700" fill="#B71C1C">Watershed</text>
+        <rect x="212" y="543" width="12" height="12" fill="#26A69A" rx="2"/>
+        <text x="228" y="553" font-family="sans-serif" font-size="10" font-weight="600" fill="#004D40">Protegida (Adamkiewicz)</text>
+        <line x1="390" y1="548" x2="410" y2="548" stroke="#B71C1C" stroke-width="3" stroke-linecap="round"/>
+        <text x="414" y="553" font-family="sans-serif" font-size="10" font-weight="700" fill="#B71C1C">AEA anterior</text>
+        <line x1="498" y1="548" x2="518" y2="548" stroke="#004D40" stroke-width="2" stroke-dasharray="4 3" stroke-linecap="round"/>
+        <text x="522" y="553" font-family="sans-serif" font-size="10" font-weight="700" fill="#004D40">AEP posterior</text>
+      </svg>
+    </div>
+
+    <!-- TEXT CONTENT -->
+    <div class="two-col">
+      <div class="info-block">
+        <h4>🩸 Arteria Espinal Anterior (AEA)</h4>
+        <p>Arteria única, formada por la unión de dos ramas de las arterias vertebrales a nivel bulbar. Desciende por la fisura media anterior de toda la médula (C1 → cono). Recibe refuerzos de arterias radiculomedulares en distintos niveles, siendo la <strong>arteria de Adamkiewicz</strong> el más importante. <a class="cite-link" href="https://esmed.org/spinal-cord-ischemia-diagnosis-and-treatment-insights/" target="_blank">ESM 2025</a></p>
+        <p style="margin-top:8px"><strong>Irriga los 2/3 anteriores en todos los niveles:</strong> cuernos anteriores (motoneurona inferior), tracto corticoespinal lateral (motoneurona superior), tracto espinotalámico (dolor y temperatura), comisura anterior.</p>
+        <div class="pill-row">
+          <span class="tag tag-red">87% de los infartos medulares</span>
+          <span class="tag tag-amber">Síndrome más frecuente</span>
+        </div>
+      </div>
+      <div class="info-block">
+        <h4>🩸 Arterias Espinales Posteriores (AEP)</h4>
+        <p>Par de arterias, originadas en la PICA o directamente en las vertebrales. Irrigan el <strong>1/3 posterior</strong> de la médula: columnas posteriores (propiocepción, vibración, tacto discriminativo) y cuernos posteriores.</p>
+        <p style="margin-top:8px"><strong>Infarto de AEP: &lt;5% de los casos.</strong> Presentación: pérdida aislada de columnas posteriores con motricidad conservada — simula mielopatía por déficit de B12 o cobre. En imagen: hiperintensidad lineal posterior en DWI axial.</p>
+        <div class="pill-row">
+          <span class="tag tag-gray">Muy raro</span>
+          <span class="tag tag-blue">DDx: B12, cobre, tabes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-block" style="margin-top:14px">
+      <h4>⚠️ Arteria de Adamkiewicz y Zonas Watershed</h4>
+      <div class="table-wrap" style="margin-top:8px">
+        <table>
+          <thead><tr><th>Región</th><th>Fuente principal</th><th>Vulnerabilidad</th><th>Contexto clínico</th></tr></thead>
+          <tbody>
+            <tr><td>C1–C4</td><td>Arterias vertebrales directas</td><td><span class="tag tag-green">Baja</span></td><td>Infarto raro — irrigación abundante</td></tr>
+            <tr><td>C5–T1</td><td>A. radiculomedular cervical</td><td><span class="tag tag-gray">Moderada</span></td><td>Tetraparesia si hay infarto</td></tr>
+            <tr><td>T1–T4</td><td>Zona de transición</td><td><span class="tag tag-amber">Alta</span></td><td>Sin refuerzo lateral propio</td></tr>
+            <tr><td><strong>T4–T8</strong></td><td>Sin refuerzo — frontera vascular</td><td><span class="tag tag-red">WATERSHED</span></td><td>Hipotensión severa, cirugía mayor, PCR</td></tr>
+            <tr><td>T9–L2</td><td>Arteria de Adamkiewicz (T9–L2 izq.)</td><td><span class="tag tag-green">Baja</span></td><td>Si Adamkiewicz falla → infarto extenso</td></tr>
+            <tr><td>L3–S5 / Cono</td><td>Adamkiewicz + ramas sacras</td><td><span class="tag tag-gray">Moderada</span></td><td>PCR, hemorragia masiva, cirugía aórtica</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="alert alert-warning" style="margin-top:12px">
+        <strong>Adamkiewicz — el vaso más importante a proteger en cirugía aórtica</strong>
+        Sale de la aorta torácica o lumbar alta (T9–L2, lado izquierdo en ~75% de los casos). Es la principal fuente de irrigación para los 2/3 inferiores de la médula. Su oclusión por disección aórtica, cirugía endovascular o ateroembolismo produce paraparesia severa con nivel sensitivo torácico bajo. En la planificación quirúrgica aórtica se puede mapear con AngioRM o AngioTC.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Clínica -->
+  <div class="sub-content" id="q-clin">
+    <div class="alert alert-danger">
+      <strong>Presentación típica:</strong> Instalación HIPERAGUDA (&lt;4 horas) de dolor dorsal brusco seguido de déficit neurológico bilateral. Diferencia clave con mielitis inflamatoria (más lento).
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Síndrome más frecuente</div>
+        <h4>Arteria Espinal Anterior</h4>
+        <ul>
+          <li>Inicio hiperagudo (segundos–minutos)</li>
+          <li>Dolor dorsal/interescapular brusco</li>
+          <li>Paraparesia/tetraparesia fláccida inicial (shock medular)</li>
+          <li>Nivel sensitivo para dolor y temperatura (tracto espinotalámico)</li>
+          <li>Preservación de columnas posteriores (tacto, propiocepción)</li>
+          <li>Disfunción autonómica (retención urinaria, íleo)</li>
+        </ul>
+        <div class="pill-row"><span class="tag tag-amber">87% de los casos</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Presentaciones especiales</div>
+        <h4>Variantes clínicas</h4>
+        <ul>
+          <li><strong>Surfer's myelopathy:</strong> jóvenes, valsalva + hiperextensión, progresivo horas</li>
+          <li><strong>Embolia fibrocartilaginosa:</strong> tras maniobra de Valsalva/trauma, dolor agudo + déficit rápido</li>
+          <li><strong>Post-cirugía aórtica:</strong> paraplejía al despertar</li>
+          <li><strong>Isquemia por hipotensión:</strong> lumbosacra, puede simular síndrome de cauda equina</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Diagnóstico diferencial</div>
+        <h4>Vs. Mielitis Inflamatoria</h4>
+        <div class="table-wrap" style="margin-top:6px">
+          <table style="font-size:11px">
+            <tr><th>Característica</th><th>Isquémico</th><th>Inflamatorio</th></tr>
+            <tr><td>Inicio</td><td>Hiperagudo &lt;4h</td><td>Agudo-subagudo</td></tr>
+            <tr><td>Dolor</td><td>Agudo, radicular</td><td>Variable</td></tr>
+            <tr><td>Debut motor</td><td>Flácido</td><td>Espástico/mixto</td></tr>
+            <tr><td>LCR</td><td>Normal o leve ↑prot</td><td>Pleocitosis</td></tr>
+            <tr><td>DWI RMN</td><td>Positivo ~50%</td><td>Negativo</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagnóstico -->
+  <div class="sub-content" id="q-dx">
+
+    <!-- ACORDEÓN STYLES para isquémica (reusar clase accord ya definida en t-cls) -->
+    <style>
+      [data-theme="isq"] .accord summary:hover { background: rgba(245,158,11,0.08); }
+      [data-theme="isq"] .accord[open] summary { color: var(--tab-isq); }
+    </style>
+
+    <div class="alert alert-danger" style="margin-bottom:16px">
+      <strong>Concepto clave</strong>
+      Una RMN normal en las primeras horas <strong>no descarta infarto medular.</strong> La sospecha clínica es el factor determinante — no debe esperarse confirmación radiológica para iniciar manejo.
+    </div>
+
+    <!-- 1. TIMING -->
+    <details class="accord" open>
+      <summary><span class="accord-icon">⏱️</span> Ventana temporal — cuándo es positiva la RMN</summary>
+      <div class="accord-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Tiempo desde inicio</th><th>T2</th><th>DWI</th><th>Recomendación</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><span class="tag tag-red">&lt;6h — hiperagudo</span></td>
+                <td>Negativa en ~75% <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9499193/" target="_blank">Yokota 2022</a></td>
+                <td>Positiva en ~38% torácico / más en cervical tardío</td>
+                <td>Priorizar DWI. Si negativo, no descartar. Repetir.</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-amber">6–24h</span></td>
+                <td>Progresivamente positiva</td>
+                <td>Más sensible. Restricción evidente si presente.</td>
+                <td>Ventana óptima para DWI. T2 puede ya ser positiva.</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-green">24–72h</span></td>
+                <td>Mayor positividad y confianza diagnóstica <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9499193/" target="_blank">Yokota 2022</a></td>
+                <td>Máximo rendimiento diagnóstico</td>
+                <td>Ventana óptima para T2. Repetir aquí si primera fue negativa.</td>
+              </tr>
+              <tr>
+                <td><span class="tag tag-gray">&gt;1 semana</span></td>
+                <td>Hiperintensidad establecida. Puede aparecer atrofia medular.</td>
+                <td><strong>DWI se vuelve negativo</strong> — ventana de ~7 días <a class="cite-link" href="https://radiologyassistant.nl/neuroradiology/brain-ischemia/imaging-in-acute-stroke" target="_blank">RadAssistant</a></td>
+                <td>T2 + gadolinio. DWI ya no es útil.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-warning" style="margin-top:10px">
+          <strong>⚠ DWI medular ≠ DWI cerebral</strong>
+          En ACV cerebral el DWI permanece positivo ~3 semanas. En infarto medular la ventana es solo <strong>~7 días</strong>. Si se solicita la RMN tardíamente, el DWI puede ya ser negativo aunque el infarto sea real. <a class="cite-link" href="https://radiologyassistant.nl/neuroradiology/brain-ischemia/imaging-in-acute-stroke" target="_blank">RadAssistant</a>
+        </div>
+      </div>
+    </details>
+
+    <!-- 2. SIGNOS EN T2 -->
+    <details class="accord" open>
+      <summary><span class="accord-icon">🧲</span> Signos en T2 — los patrones clásicos</summary>
+      <div class="accord-body">
+        <div class="card-grid">
+          <div class="card">
+            <div class="card-label">Sagital T2</div>
+            <h4>🖊️ Pencil-like sign</h4>
+            <p>Hiperintensidad lineal, delgada, de distribución anterior, que sigue el eje longitudinal de la médula a lo largo de varios segmentos. Representa el territorio de la arteria espinal anterior en sagital. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11450783/" target="_blank">Dokponou 2024</a></p>
+            <div class="pill-row"><span class="tag tag-amber">Signo característico</span></div>
+          </div>
+          <div class="card">
+            <div class="card-label">Axial T2 o DWI</div>
+            <h4>🦉 Owl's Eye Sign</h4>
+            <p>Dos puntos hiperintensos bilaterales y simétricos en los cuernos anteriores (sustancia gris anterior) en corte axial. Representa isquemia selectiva de la sustancia gris, que es más vulnerable al daño isquémico por su mayor demanda metabólica. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8743178/" target="_blank">Curr J Neurol 2021</a></p>
+            <div class="pill-row"><span class="tag tag-amber">Patognomónico de AEA</span></div>
+          </div>
+          <div class="card">
+            <div class="card-label">Sagital T1 / T2</div>
+            <h4>🦴 Infarto de cuerpo vertebral</h4>
+            <p>Señal anormal en el cuerpo vertebral adyacente al nivel del infarto medular. Ocurre porque el cuerpo vertebral y la médula comparten irrigación arterial (misma arteria radiculomedular). <strong>Altamente específico de etiología vascular</strong>, especialmente de embolia fibrocartilaginosa. <a class="cite-link" href="https://www.neurology.org/doi/10.1212/WNL.92.15_supplement.P4.3-008" target="_blank">Neurology 2019</a></p>
+            <div class="pill-row"><span class="tag tag-green">Alta especificidad vascular</span><span class="tag tag-red">Buscar FCE</span></div>
+          </div>
+          <div class="card">
+            <div class="card-label">Axial DWI</div>
+            <h4>📏 Hiperintensidad lineal posterior</h4>
+            <p>Hiperintensidad lineal en columnas posteriores en corte axial. Frecuentemente observada en DWI en infartos de arteria espinal <strong>posterior</strong> — entidad mucho más rara (&lt;5% de los infartos medulares). Puede simular mielopatía de columnas posteriores (B12, cobre). <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9552435/" target="_blank">BMC Neurol 2022</a></p>
+            <div class="pill-row"><span class="tag tag-gray">Infarto AEP — raro</span></div>
+          </div>
+          <div class="card">
+            <div class="card-label">T1 con gadolinio</div>
+            <h4>💉 Realce con contraste</h4>
+            <p><strong>Fase aguda:</strong> generalmente ausente — el flujo interrumpido impide la llegada del contraste al tejido infartado. <strong>Fase subaguda (días):</strong> puede aparecer realce periférico o difuso. La <em>ausencia</em> de realce en fase aguda es un dato que apoya infarto vs inflamatorio (NMOSD que generalmente realza). <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9792649/" target="_blank">Chiew 2022</a></p>
+            <div class="pill-row"><span class="tag tag-blue">Ausente en agudo → favor vascular</span></div>
+          </div>
+          <div class="card">
+            <div class="card-label">T1 sagital</div>
+            <h4>🩸 Transformación hemorrágica</h4>
+            <p>Hiperintensidad en T1 intramedular — indica transformación hemorrágica del infarto. Relativamente raro, pero puede verse en infartos extensos o con reperfusión. Asociado a peor pronóstico funcional.</p>
+            <div class="pill-row"><span class="tag tag-red">Peor pronóstico</span></div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <!-- 3. DWI/ADC -->
+    <details class="accord">
+      <summary><span class="accord-icon">🔍</span> DWI y ADC — diagnóstico temprano y diferencial con NMOSD</summary>
+      <div class="accord-body">
+        <h3>Restricción verdadera vs pseudorrestricción</h3>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Entidad</th><th>DWI</th><th>ADC</th><th>Interpretación</th></tr></thead>
+            <tbody>
+              <tr>
+                <td><strong>Infarto medular</strong></td>
+                <td>🔴 Hiperintenso</td>
+                <td>🔵 <strong>Hipointenso</strong></td>
+                <td>Restricción verdadera — edema citotóxico, muerte celular</td>
+              </tr>
+              <tr>
+                <td><strong>NMOSD</strong></td>
+                <td>Variable (puede ser hiperintenso)</td>
+                <td>⚪ Iso o <strong>hiperintenso</strong></td>
+                <td>Sin restricción real — edema vasogénico inflamatorio</td>
+              </tr>
+              <tr>
+                <td><strong>Mielitis idiopática</strong></td>
+                <td>Generalmente negativo</td>
+                <td>Normal o hiperintenso</td>
+                <td>Sin restricción</td>
+              </tr>
+              <tr>
+                <td><strong>Compresión aguda</strong></td>
+                <td>Puede ser positivo</td>
+                <td>Variable</td>
+                <td>Componente isquémico secundario a compresión</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-info" style="margin-top:12px">
+          <strong>Clave práctica ADC</strong>
+          Siempre leer el DWI junto con el mapa ADC. Un DWI hiperintenso con ADC <strong>hipointenso</strong> = restricción verdadera = isquemia. Un DWI hiperintenso con ADC <strong>isointenso o hiperintenso</strong> = T2 shine-through = inflamatorio, no isquémico. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9552435/" target="_blank">BMC Neurol 2022</a>
+        </div>
+
+        <h3 style="margin-top:14px">Limitaciones técnicas del DWI medular</h3>
+        <div class="info-block">
+          <ul>
+            <li><strong>Artefactos de flujo:</strong> la médula está rodeada de LCR pulsátil → artefactos de movimiento que degradan la imagen</li>
+            <li><strong>Proximidad al hueso:</strong> la columna vertebral genera susceptibilidad magnética que distorsiona las secuencias EPI</li>
+            <li><strong>Curvatura de la médula:</strong> dificulta el planeamiento de los cortes axiales</li>
+            <li><strong>Dirección longitudinal de tractos:</strong> la difusión anisotrópica de la sustancia blanca afecta la interpretación</li>
+            <li><strong>Dependencia de campo:</strong> mejor calidad a 3T; a 1.5T la sensibilidad cae significativamente</li>
+          </ul>
+          <p style="margin-top:8px;color:var(--text-dim);font-size:12px"><a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11450783/" target="_blank">Dokponou Surg Neurol Int 2024</a></p>
+        </div>
+      </div>
+    </details>
+
+    <!-- 4. FCE -->
+    <details class="accord">
+      <summary><span class="accord-icon">💊</span> Embolia Fibrocartilaginosa (FCE) — hallazgos radiológicos específicos</summary>
+      <div class="accord-body">
+        <div class="two-col">
+          <div class="info-block">
+            <h4>¿Qué es la FCE?</h4>
+            <p>Migración de material fibrocartilaginoso del núcleo pulposo del disco intervertebral hacia la vasculatura arterial espinal — ocluye arteria radiculomedular o directamente vasos intramedulares. Representa ~5.5% de los infartos medulares. <a class="cite-link" href="https://www.neurology.org/doi/10.1212/WNL.92.15_supplement.P4.3-008" target="_blank">Neurology 2019</a></p>
+            <p style="margin-top:8px"><strong>Contexto clínico típico:</strong> maniobra de Valsalva, ejercicio intenso, levantamiento de peso, trauma axial leve. Puede ocurrir en jóvenes sin factores de riesgo vascular.</p>
+          </div>
+          <div class="info-block">
+            <h4>Tríada radiológica de FCE</h4>
+            <ol style="padding-left:18px;display:flex;flex-direction:column;gap:6px">
+              <li>
+                <strong>Infarto medular</strong> — señal T2 y/o DWI intramedular con restricción en ADC
+              </li>
+              <li>
+                <strong>Infarto de cuerpo vertebral adyacente</strong> — señal anormal en médula ósea del cuerpo vertebral al mismo nivel. <em>Hallazgo altamente específico.</em> <a class="cite-link" href="https://www.neurology.org/doi/10.1212/WNL.92.15_supplement.P4.3-008" target="_blank">Neurology 2019</a>
+              </li>
+              <li>
+                <strong>Lesión discal / protrusión</strong> — colapso o prolapso del disco intervertebral responsable. <em>Puede no ser evidente en la RMN inicial — aparecer en seguimiento a los 5–7 días.</em> <a class="cite-link" href="https://www.nature.com/articles/s41394-022-00477-y" target="_blank">Spinal Cord 2022</a>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="alert alert-warning" style="margin-top:12px">
+          <strong>⚠ Evolución radiológica retardada — clave práctica</strong>
+          En FCE, la RMN inicial puede ser completamente normal o mostrar solo sutil señal T2. Una RMN de seguimiento realizada 5 días después puede revelar colapso discal y defecto del cuerpo vertebral que no eran evidentes en el estudio inicial. Si la sospecha clínica es alta y la primera RMN es negativa o equívoca: <strong>repetir RMN con DWI dedicado a las 48–72h.</strong>
+        </div>
+        <div class="alert alert-danger" style="margin-top:10px">
+          <strong>Implicancia terapéutica</strong>
+          En FCE, los corticoides y la plasmaféresis están contraindicados (no es inflamatorio). El diagnóstico correcto evita tratamiento inmunosupresor innecesario. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10082949/" target="_blank">FCE Case PMC 2023</a>
+        </div>
+      </div>
+    </details>
+
+    <!-- 5. PROTOCOLO RMN -->
+    <details class="accord">
+      <summary><span class="accord-icon">📋</span> Protocolo RMN recomendado</summary>
+      <div class="accord-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Secuencia</th><th>Plano</th><th>Qué aporta</th><th>Cuándo es clave</th></tr></thead>
+            <tbody>
+              <tr><td><strong>T2</strong></td><td>Sagital + Axial</td><td>Pencil sign (sagital), owl's eye (axial), extensión de lesión</td><td>Siempre — base del diagnóstico</td></tr>
+              <tr><td><strong>DWI + ADC</strong></td><td>Sagital + Axial</td><td>Diagnóstico temprano, diferenciación NMOSD (ADC hipointenso vs iso/hiperintenso)</td><td>Hiperagudo (&lt;72h) — obligatorio</td></tr>
+              <tr><td><strong>T1 sin contraste</strong></td><td>Sagital</td><td>Infarto de cuerpo vertebral, hemorragia intramedular (T1 hiperintenso)</td><td>Siempre</td></tr>
+              <tr><td><strong>T1 con gadolinio</strong></td><td>Sagital + Axial</td><td>Ausencia de realce → favor vascular. Descarta inflamatorio, absceso, neoplasia</td><td>Siempre — diferencial etiológico</td></tr>
+              <tr><td><strong>STIR</strong></td><td>Sagital</td><td>Sensible para edema medular temprano cuando T2 equívoco</td><td>Ventana hiperaguda</td></tr>
+              <tr><td><strong>AngioRM aorta</strong></td><td>Coronal</td><td>Disección aórtica, ateromatosis, origen Adamkiewicz</td><td>Sin causa clara — siempre buscar</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-info" style="margin-top:12px">
+          <strong>Regla práctica para la guardia</strong>
+          <br>Clínica hiperaguda compatible + RMN normal → <strong>no descartar infarto medular</strong> → repetir RMN con DWI dedicado a las 24–72h. La sospecha clínica + perfil temporal (onset &lt;4h, dolor brusco, síndrome AEA) son suficientes para iniciar manejo aunque la imagen inicial sea negativa.
+        </div>
+      </div>
+    </details>
+
+    <!-- 6. DDx RADIOLÓGICO -->
+    <details class="accord">
+      <summary><span class="accord-icon">⚖️</span> Diagnóstico diferencial radiológico — infarto vs inflamatorio</summary>
+      <div class="accord-body">
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Característica RMN</th><th>Infarto medular</th><th>NMOSD (AQP4+)</th><th>Mielitis idiopática / EM</th></tr></thead>
+            <tbody>
+              <tr><td>Extensión longitudinal</td><td>Variable; puede ser extensa o corta</td><td>≥3 segmentos (LETM)</td><td>EM: &lt;2 segmentos. MT idiopática: variable</td></tr>
+              <tr><td>Localización axial</td><td>Anterior (AEA) o posterior (AEP)</td><td>Central, compromete &gt;50% del área</td><td>Posterolateral (EM). Central (MT)</td></tr>
+              <tr><td>Owl's eye sign</td><td>✅ Frecuente (cuernos anteriores)</td><td>❌ Raro</td><td>❌ Raro</td></tr>
+              <tr><td>DWI restricción (ADC bajo)</td><td>✅ Restricción verdadera</td><td>❌ ADC iso/hiperintenso</td><td>❌ Generalmente negativo</td></tr>
+              <tr><td>Realce con gadolinio (agudo)</td><td>❌ Ausente en agudo</td><td>✅ Frecuente — "pencil enhancement"</td><td>✅ Presente (realce en anillo o parche)</td></tr>
+              <tr><td>Infarto cuerpo vertebral</td><td>✅ Posible (FCE)</td><td>❌ Ausente</td><td>❌ Ausente</td></tr>
+              <tr><td>Lesiones cerebrales asociadas</td><td>❌ Ausentes</td><td>Posibles (área postrema, diencéfalo)</td><td>✅ Frecuentes (criterios McDonald)</td></tr>
+              <tr><td>LCR</td><td>Normal o proteínas leves ↑</td><td>Pleocitosis, GFAP ↑, AQP4+</td><td>BOC +, IgG ↑, MOG posible</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:12px;color:var(--text-dim);margin-top:8px">
+          <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9552435/" target="_blank">BMC Neurol 2022</a>
+          <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9792649/" target="_blank">Chiew 2022</a>
+          <a class="cite-link" href="https://pubmed.ncbi.nlm.nih.gov/31092876/" target="_blank">Hsu 2019</a>
+        </p>
+      </div>
+    </details>
+
+    <!-- DATOS ORIGINALES PRESERVADOS -->
+    <div class="two-col" style="margin-top:14px">
+      <div class="info-block">
+        <h4>🔬 LCR</h4>
+        <ul>
+          <li>Frecuentemente normal</li>
+          <li>Proteínas levemente elevadas</li>
+          <li>Sin pleocitosis significativa (vs inflamatorio)</li>
+          <li>Excluye meningitis/encefalitis</li>
+          <li>Sin anticuerpos AQP4/MOG</li>
+        </ul>
+      </div>
+      <div class="info-block">
+        <h4>🫀 Estudio vascular y cardíaco</h4>
+        <ul>
+          <li>AngioTC/AngioRM aorta y vasos espinales</li>
+          <li>Ecocardio (fuente embólica)</li>
+          <li>Holter 24h</li>
+          <li>Perfil de coagulación, APLA</li>
+          <li>VSG, PCR, ANCA (vasculitis)</li>
+          <li>RX/TC tórax (Adamkiewicz)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert alert-warning" style="margin-top:10px">
+      <strong>Criterio diagnóstico (Zalewski 2016):</strong> Perfil temporal + patrón clínico + imágenes compatibles + exclusión de otras causas. No siempre se confirma con DWI. En 44–74% de casos no se identifica causa.
+    </div>
+
+  </div>
+
+  <!-- Tratamiento -->
+  <div class="sub-content" id="q-tx">
+    <div class="alert alert-danger">
+      <strong>No existen guías específicas basadas en evidencia de alto nivel para el tratamiento del infarto medular.</strong> El manejo se extrapola del ACV cerebral y la fisiopatología.
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Reperfusión</div>
+        <h4>Trombólisis IV (rtPA)</h4>
+        <p>No existe recomendación estandarizada ni ensayo clínico. Reportes de casos y series muy pequeñas describen su uso. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11856212/" target="_blank">Vergara 2025</a> Considerar solo <em>caso a caso</em>, en ventana hiperaguda (&lt;4.5h), con exclusión razonable de diagnósticos alternativos (inflamatorio, compresivo, hemorrágico) y sin contraindicaciones. No extrapolar automáticamente desde el ACV cerebral.</p>
+        <div class="pill-row">
+          <span class="tag tag-red">Sin guía ni RCT — uso excepcional</span>
+          <span class="tag tag-amber">Evidencia anecdótica</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-label">Cirugía aórtica</div>
+        <h4>Drenaje de LCR</h4>
+        <p>En contexto perioperatorio de cirugía aórtica: drenaje de LCR para mantener presión de perfusión medular (&gt;70 mmHg). Estándar de cuidado en cirugía aórtica torácica.</p>
+        <div class="pill-row"><span class="tag tag-green">Evidencia perioperatoria</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Hemodinámia</div>
+        <h4>Optimización MAP</h4>
+        <p>Mantener normotensión o hipertensión moderada (por analogía con LMT). Evitar hipotensión. Volemia adecuada. Sin evidencia específica para targets de MAP.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Antitrombótico</div>
+        <h4>Según etiología</h4>
+        <ul>
+          <li>Anticoagulación: FA, hipercoagulabilidad, disección</li>
+          <li>Antiagregación: aterosclerosis, embolia paradójica</li>
+          <li>Evitar en embolia fibrocartilaginosa</li>
+          <li>Individualizar según fuente</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-block">
+      <h4>📈 Pronóstico</h4>
+      <p>La recuperación es variable. Factores de mejor pronóstico: lesión incompleta, nivel bajo, recuperación motora temprana. La mayoría alcanza un plateau funcional en 3–6 meses. Déficits residuales frecuentes: vejiga neurógena, espasticidad, dolor neuropático, disfunción sexual. Rehabilitación intensiva es el pilar del tratamiento.</p>
+    </div>
+    <div class="source-list">
+      <a class="source-chip" href="https://www.mdpi.com/2077-0383/14/4/1293" target="_blank">MDPI JCM 2025</a>
+      <a class="source-chip" href="https://surgicalneurologyint.com/surgicalint-articles/spinal-cord-infarction-a-systematic-review-and-meta-analysis-of-patients-characteristics-diagnosis-accuracy-management-and-outcome/" target="_blank">Surg Neurol Int 2024</a>
+      <a class="source-chip" href="https://www.ahajournals.org/doi/10.1161/str.56.suppl_1.WMP35" target="_blank">AHA ISC 2025 — abstract congreso (apoyo epidemiológico/diagnóstico, no guía terapéutica)</a>
+      <a class="source-chip" href="https://esmed.org/MRA/mra/article/view/6272" target="_blank">ESM Ischemia Review 2025</a>
+    </div>
+  </div>
+</div>
+<!-- END ISQUÉMICA -->
+
+
+<!-- ═══════════════════ OTRAS ═══════════════════ -->
+<div class="tab-content" id="tab-other" data-theme="other">
+  <div class="section-header">
+    <div class="section-icon">🔭</div>
+    <div>
+      <div class="section-title">Otras Mielopatías — Etiologías No Traumáticas</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-top:2px;">Compresiva · Neoplásica · Vascular Crónica · Metabólica · Degenerativa</div>
+    </div>
+  </div>
+
+  <div class="sub-nav">
+    <button type="button" class="sub-btn active" data-sub="o-comp" role="tab" aria-selected="true" onclick="switchSub('other','o-comp')">Compresivas</button>
+    <button type="button" class="sub-btn" data-sub="o-neo" role="tab" aria-selected="false" onclick="switchSub('other','o-neo')">Neoplásicas</button>
+    <button type="button" class="sub-btn" data-sub="o-vasc" role="tab" aria-selected="false" onclick="switchSub('other','o-vasc')">Vasculares Crónicas</button>
+    <button type="button" class="sub-btn" data-sub="o-met" role="tab" aria-selected="false" onclick="switchSub('other','o-met')">Metabólicas / Tóxicas</button>
+    <button type="button" class="sub-btn" data-sub="o-degen" role="tab" aria-selected="false" onclick="switchSub('other','o-degen')">Degenerativas</button>
+    <button type="button" class="sub-btn" data-sub="o-ddx" role="tab" aria-selected="false" onclick="switchSub('other','o-ddx')">Diagnóstico Diferencial</button>
+  </div>
+
+  <!-- Compresivas -->
+  <div class="sub-content active" id="o-comp">
+    <div class="alert alert-danger">
+      <strong>⚠️ Emergencia quirúrgica:</strong> La compresión medular aguda (hematoma epidural, absceso, fractura patológica) requiere descompresión de urgencia. "Time is spine."
+    </div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Hematoma Epidural Espinal</div>
+        <h4>Espontáneo / Anticoagulación</h4>
+        <p>Acumulación de sangre en espacio epidural. Causas: anticoagulación, coagulopatía, malformación vascular, hipertensión, maniobra de Valsalva. RMN: masa epidural hiperdensa (TC) o señal de sangre (RMN). Descompresión quirúrgica urgente si déficit progresivo. <a class="cite-link" href="https://www.ncbi.nlm.nih.gov/books/NBK608592/" target="_blank">NCBI 2024</a></p>
+        <div class="pill-row"><span class="tag tag-red">Urgencia quirúrgica</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Absceso Epidural Espinal</div>
+        <h4>Infección bacteriana</h4>
+        <p>Staphylococcus aureus más frecuente. FR: UDVP, diabetes, cirugía espinal, bacteriemia. Tríada: fiebre + dolor espinal + déficit neurológico (infrecuente juntos). RMN con gadolinio: colección epidural con realce periférico. ATB + descompresión.</p>
+        <div class="pill-row"><span class="tag tag-red">ATB + cirugía</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Mielopatía Cervical Degenerativa</div>
+        <h4>Causa más frecuente de mielopatía en adultos &gt;55 años</h4>
+        <p>Estenosis del canal cervical por discopatía + osteofitosis + hipertrofia LF + OPLL. Síntomas: torpeza de manos, inestabilidad marcha, déficit sensitivo, vejiga irritativa. RMN: compresión medular + señal T2 intramedular. Cirugía si mielopatía moderada-severa o progresiva.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Estenosis Lumbar</div>
+        <h4>Claudicación Neurógena</h4>
+        <p>Dolor irradiado a piernas al caminar, alivia flexionando columna (diferencia de claudicación vascular). Compresión de cauda equina. TC/RMN. Manejo conservador → epidural → cirugía según gravedad.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Neoplásicas -->
+  <div class="sub-content" id="o-neo">
+    <h3>Mielopatía Neoplásica</h3>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Tipo</th><th>Origen/Localización</th><th>Presentación</th><th>Diagnóstico</th><th>Tratamiento</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>Metástasis epidurales</strong></td>
+            <td>Extradurales (mama, pulmón, próstata, riñón, mieloma)</td>
+            <td>Dolor → debilidad → anestesia → esfínteres. Fractura patológica frecuente.</td>
+            <td>RMN toda la columna, TC tórax/abd/pelvis, biopsia</td>
+            <td>Dexametasona IV urgente → radioterapia y/o cirugía descompresiva según ESCC</td>
+          </tr>
+          <tr>
+            <td><strong>Tumores intradurales extramedular</strong></td>
+            <td>Meningiomas, schwannomas, neurofibromas</td>
+            <td>Síntomas radiculares + mielopatía lenta</td>
+            <td>RMN con gadolinio: lesión extramedular con desplazamiento medular</td>
+            <td>Cirugía — excelente pronóstico en benignos</td>
+          </tr>
+          <tr>
+            <td><strong>Tumores intramedulares</strong></td>
+            <td>Ependimoma (#1 adultos), astrocitoma, hemangioblastoma</td>
+            <td>Mielopatía lentamente progresiva, dolor central</td>
+            <td>RMN: expansión medular, realce de gadolinio, quiste asociado</td>
+            <td>Cirugía (microscopía) ± radioterapia. Pronóstico según grado y completitud resección.</td>
+          </tr>
+          <tr>
+            <td><strong>Linfoma</strong></td>
+            <td>Intradural, epidural o intramedular</td>
+            <td>Rápidamente progresivo</td>
+            <td>RMN + LCR citología + biopsia</td>
+            <td>Quimioterapia (metotrexato intratecal) ± rituximab</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-warning">
+      <strong>Compresión Epidural Metastásica (ESCC):</strong> Dexametasona 10–16 mg IV bolo + 4–8 mg c/6h mientras se decide tratamiento definitivo. Valorar ESCC score por RMN para guiar cirugía vs radioterapia.
+    </div>
+  </div>
+
+  <!-- Vasculares Crónicas -->
+  <div class="sub-content" id="o-vasc">
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Fístula Arteriovenosa Dural (FAV)</div>
+        <h4>Causa tratable más frecuente de mielopatía vascular crónica</h4>
+        <p>Conexión anormal arteria-vena dural → hipertensión venosa → congestión medular. Hombres >50 años. Evolución subaguda-crónica. <strong>Signo Foix-Alajouanine:</strong> mielopatía progresiva + atrofia medular. <a class="cite-link" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11938100/" target="_blank">Murphy 2024</a></p>
+        <p style="margin-top:8px"><strong>RMN:</strong> realce medular serpentinoso periférico (venas dilatadas), señal T2 extensa. Confirmación: angiografía medular selectiva.</p>
+        <p style="margin-top:8px"><strong>Tratamiento:</strong> embolización endovascular o cirugía (ligadura fístula). Alta tasa de mejoría si tratamiento precoz.</p>
+        <div class="pill-row"><span class="tag tag-green">Tratable — no perder el diagnóstico</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Malformación Arteriovenosa (MAV)</div>
+        <h4>Riesgo de hemorragia</h4>
+        <p>Jóvenes. Puede presentarse con hemorragia subaracnoidea espinal, hematomielia o mielopatía progresiva. Angiografía gold standard. Tratamiento: radioterapia estereotáctica, embolización o cirugía según tipo y localización.</p>
+        <div class="pill-row"><span class="tag tag-red">Riesgo hemorragia</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Cavernomas Espinales</div>
+        <h4>Hemangioma cavernoso</h4>
+        <p>Menos frecuente. Hemorragias repetidas intramedular. RMN: lesión intramedular con halo de hemosiderina en T2* (popcorn lesion). Manejo: conservador o cirugía si hemorragias repetidas o mielopatía progresiva.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Metabólicas -->
+  <div class="sub-content" id="o-met">
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Degeneración Combinada Subaguda</div>
+        <h4>Déficit de Vitamina B12</h4>
+        <p>Afecta columnas posteriores y laterales. Síntomas: parestesias manos y pies, ataxia, demencia. Anemia megaloblástica (no siempre presente). RMN: señal T2 en columnas posteriores cervicales ("inverted V sign"). Tratamiento: B12 IM urgente → recuperación parcial si no crónico.</p>
+        <div class="pill-row"><span class="tag tag-green">Causa tratable</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Déficit de Cobre</div>
+        <h4>Mielopatía por Cobre</h4>
+        <p>Clínica similar a B12. Causas: cirugía bariátrica, exceso de zinc. Dosaje de cobre sérico y ceruloplasmina. Suplementación con cobre oral/IV.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Mielopatía por VIH</div>
+        <h4>Mielopatía Vacuolar</h4>
+        <p>Afectación subaguda-crónica de columnas posteriores y laterales. CD4 bajo. Causa: daño directo VIH + déficit B12 frecuente asociado. Tratamiento: TARV + suplementos.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">HTLV-1</div>
+        <h4>Paraparesia Espástica Tropical</h4>
+        <p>Endémica Caribe, Japón, sudamérica. Mielopatía lentamente progresiva, paraparesia espástica, vejiga hiperrefléxica. Serología HTLV-1 + (suero y LCR). Manejo: corticoides, TARV — sin cura.</p>
+        <div class="pill-row"><span class="tag tag-amber">Endémica Sudamérica</span></div>
+      </div>
+      <div class="card">
+        <div class="card-label">Neurotóxico</div>
+        <h4>Mielopatías Tóxicas</h4>
+        <ul>
+          <li>Oxalato de platino → neuropatía/mielopatía</li>
+          <li>Óxido nitroso → acelera déficit B12</li>
+          <li>Heroinomangánica (poco frecuente)</li>
+          <li>Radioterapia → mielopatía tardía rara</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="card-label">Metabólica / Sistémica</div>
+        <h4>Otras causas</h4>
+        <ul>
+          <li>Hipocupremia en enfermedad de Wilson</li>
+          <li>Hipotiroidismo severo</li>
+          <li>Déficit de vitamina E</li>
+          <li>Adrenomieloneuropatía (ALD)</li>
+          <li>Ataxia de Friedreich</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Degenerativas -->
+  <div class="sub-content" id="o-degen">
+    <div class="info-block">
+      <h4>🧬 Mielopatías Hereditarias/Degenerativas</h4>
+      <div class="card-grid" style="margin-top:12px">
+        <div class="card">
+          <div class="card-label">ELA — SLA</div>
+          <h4>Esclerosis Lateral Amiotrófica</h4>
+          <p>Compromiso de NMSup + NMInf simultáneo. Mielopatía + neuropatía motora. Progresión rápida. Criterios de El Escorial/Gold Coast. Sin tratamiento curativo; riluzol/edaravona modulan evolución.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Paraparesia espástica hereditaria</div>
+          <h4>HSP (Hereditary Spastic Paraplegia)</h4>
+          <p>Grupo heterogéneo (>70 genes). Paraparesia espástica progresiva pura o compleja. Inicio insidioso. Estudio genético. Manejo sintomático: baclofeno, fisioterapia.</p>
+        </div>
+        <div class="card">
+          <div class="card-label">Ataxia de Friedreich</div>
+          <h4>Mielopatía + Ataxia + Cardiopatía</h4>
+          <p>Gen FXN (frataxina). AR. Inicio adolescencia. Ataxia + signo de Babinski + arreflexia. Cardiomiopatía hipertrófica. Omaveloxolone (2023, primer aprobado FDA).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DDx -->
+  <div class="sub-content" id="o-ddx">
+    <h3>Diagnóstico Diferencial — Enfoque Clínico-Temporal</h3>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Inicio temporal</th>
+            <th>Considerar primero</th>
+            <th>Claves diagnósticas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-red">Hiperaguda &lt;4h</span></td>
+            <td>Infarto medular, hematoma epidural, trauma, disección aórtica</td>
+            <td>DWI+ en RMN, sangre TC, antecedente trauma/Valsalva, dolor brusco</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-amber">Aguda 4h–21d</span></td>
+            <td>Mielitis inflamatoria (NMOSD, MOGAD, EM, idiopática), absceso epidural, embolia fibrocartilaginosa</td>
+            <td>LCR pleocitosis, AQP4/MOG, realce gadolinio, fiebre/leucocitosis</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-blue">Subaguda 21d–6sem</span></td>
+            <td>Paraneoplásica, sarcoidosis, MAV, tuberculosis espinal</td>
+            <td>Anticuerpos paraneoplásicos, SACE, Mantoux/IGRA, angiografía</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-gray">Crónica &gt;6sem</span></td>
+            <td>Mielopatía cervical degenerativa, FAV dural, HTLV-1, déficit B12/Cu, neoplasia, HSP</td>
+            <td>B12/Cu séricos, serología HTLV-1, angiografía medular, estudio genético</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Claves por Nivel Medular</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Columnas posteriores afectadas</div>
+        <h4>Déficit propiocepción + vibración</h4>
+        <p>B12, cobre, tabes dorsal (sífilis), EM (tractos posterolaterales), infarto AEP (raro)</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Cuernos anteriores</div>
+        <h4>Síndrome de NMInf pura</h4>
+        <p>ELA, SMA, poliomielitis/postpolio, MAF (enterovirus), West Nile, siringomielia</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Lesión central</div>
+        <h4>Siringomielia / Síndromes centrales</h4>
+        <p>Siringomielia (Chiari, post-trauma), tumor intramedular, mielitis viral</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Compromiso cono + cauda</div>
+        <h4>Disfunción esfinteriana + MNSup+MNInf</h4>
+        <p>Síndrome de cono, ependimoma, lipoma, tumor cono, trauma bajo</p>
+      </div>
+    </div>
+
+    <div class="source-list">
+      <a class="source-chip" href="https://pubmed.ncbi.nlm.nih.gov/38330471/" target="_blank">Murphy OC Continuum 2024</a>
+      <a class="source-chip" href="https://www.ncbi.nlm.nih.gov/books/NBK608592/" target="_blank">NCBI BookShelf Myelopathy 2024</a>
+      <a class="source-chip" href="https://pubmed.ncbi.nlm.nih.gov/29196574/" target="_blank">Barreras P Neurology 2018</a>
+      <a class="source-chip" href="https://www.ncbi.nlm.nih.gov/books/NBK560721/" target="_blank">StatPearls 2025</a>
+    </div>
+  </div>
+</div>
+<!-- END OTRAS -->
+
+</div><!-- content-wrap -->
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  const activeTab = document.querySelector(`.tab-btn[data-tab="${tab}"]`);
+  activeTab.classList.add('active');
+  activeTab.setAttribute('aria-selected', 'true');
+  document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+}
+
+function switchSub(tabId, subId) {
+  const tabEl = document.getElementById(`tab-${tabId}`);
+  tabEl.querySelectorAll('.sub-btn').forEach(b => {
+    b.classList.remove('active');
+    b.setAttribute('aria-selected', 'false');
+  });
+  const activeBtn = tabEl.querySelector(`.sub-btn[data-sub="${subId}"]`);
+  activeBtn.classList.add('active');
+  activeBtn.setAttribute('aria-selected', 'true');
+  tabEl.querySelectorAll('.sub-content').forEach(c => c.classList.remove('active'));
+  document.getElementById(subId).classList.add('active');
+}
+</script>
+<!-- ═══════════════════ BIBLIOGRAFÍA ═══════════════════ -->
+<div style="max-width:1100px;margin:0 auto 60px;padding:0 24px;">
+  <div style="border-top:2px solid var(--border);padding-top:28px;margin-top:8px;">
+    <h2 style="font-family:'DM Serif Display',serif;font-size:20px;color:#fff;margin-bottom:6px;">Bibliografía completa</h2>
+    <p style="font-size:12px;color:var(--text-dim);margin-bottom:20px;">Fuentes ordenadas por categoría. Todas las referencias corresponden a publicaciones 2018–2026.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+
+      <div>
+        <h3 style="font-size:13px;color:var(--tab-trauma);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:12px;">🦴 Lesión Medular Traumática</h3>
+        <ol style="padding-left:18px;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Krueckel J, et al. <em>Clinical recommendations for the acute care of patients with traumatic spinal cord injury.</em> Dtsch Arztebl Int. 2025;122:611–6. <a href="https://di.aerzteblatt.de/int/archive/article/247059" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Fehlings MG, Tetreault LA, Hachem L, et al. <em>An Update of a Clinical Practice Guideline for the Management of Patients With Acute Spinal Cord Injury: Recommendations on the Role and Timing of Decompressive Surgery.</em> Glob Spine J. 2024;14(3_suppl):174S–186S. doi:10.1177/21925682231181883. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10964895/" target="_blank" style="color:var(--accent2);">→ PMC10964895</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Fehlings MG, Hachem LD, Tetreault LA, et al. <em>Timing of Decompressive Surgery in Patients With Acute Spinal Cord Injury: Systematic Review Update.</em> Glob Spine J. 2024;14(3_suppl):38S–57S. doi:10.1177/21925682231197404. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10964893/" target="_blank" style="color:var(--accent2);">→ PMC10964893</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Weidner N, Scheel-Sailer A, et al. <em>Diagnostik und Therapie der akuten Querschnittlähmung — S3-Leitlinie 030-070.</em> DGN/DMGP/AWMF. Versión 6.0, septiembre 2024. Válida hasta 2029. <a href="https://register.awmf.org/de/leitlinien/detail/030-070" target="_blank" style="color:var(--accent2);">→ Registro AWMF 030-070</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Spinal Cord Injuries. <em>StatPearls</em> [Internet]. Treasure Island (FL): StatPearls Publishing; 2025 Jun 2. <a href="https://www.ncbi.nlm.nih.gov/books/NBK560721/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Balogh ZJ, et al. <em>Early management of adult traumatic spinal cord injury in patients with polytrauma: WSES & EANS consensus.</em> World J Emerg Surg. 2024;19:4. <a href="https://doi.org/10.1186/s13017-023-00525-4" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">ASIA/ISCoS International Standards Committee. <em>ISNCSCI 2019 revision.</em> Spinal Cord. 2019;57(10):815–817. <a href="https://pubmed.ncbi.nlm.nih.gov/31399664/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Ali DM, Sivaganesan A, Neal CJ, et al. <em>Bulbocavernosus Reflex Has No Prognostic Features During the Acute Evaluation of Spinal Cord Injuries.</em> J Neurotrauma. 2023;40(11-12):1143–1150. <a href="https://journals.sagepub.com/doi/10.1089/neu.2022.0412" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Ko HY. <em>Revisit Spinal Shock: Pattern of Reflex Evolution during Spinal Shock.</em> Korean J Neurotrauma. 2018;14(2):47–54. [Ditunno et al. 4-phase model.] <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6218357/" target="_blank" style="color:var(--accent2);">→ PMC6218357</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Chalif JI, et al. <em>Epidural Spinal Cord Stimulation for SCI in Humans: A Systematic Review.</em> J Clin Med. 2024;13(4). <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10889415/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+        </ol>
+      </div>
+
+      <div>
+        <h3 style="font-size:13px;color:var(--tab-inflam);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:12px;">🔬 Lesión Medular Inflamatoria</h3>
+        <ol style="padding-left:18px;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Kümpfel T, et al (NEMOS). <em>Update on diagnosis and treatment of NMOSD — revised recommendations. Part II: Attack therapy and long-term management.</em> J Neurol. 2024;271(1):141–176. <strong>Citar fuente original Springer, no agregadores.</strong> <a href="https://link.springer.com/article/10.1007/s00415-023-11910-z" target="_blank" style="color:var(--accent2);">→ Link Springer</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Jarius S, et al (NEMOS). <em>Update on diagnosis and treatment of NMOSD. Part I: Diagnosis.</em> J Neurol. 2023;270(6):3341–3368. <a href="https://link.springer.com/article/10.1007/s00415-023-11859-z" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Wingerchuk DM, et al (IPND). <em>International consensus diagnostic criteria for neuromyelitis optica spectrum disorders.</em> Neurology. 2015;85(2):177–189. <a href="https://doi.org/10.1212/WNL.0000000000001729" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Fragoso YD, et al. <em>2025 Brazilian guidelines for the management of NMOSD in adults and children.</em> Arq Neuropsiquiatr. 2025. <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC12602111/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Transverse Myelitis Consortium Working Group. <em>Proposed diagnostic criteria and nosology of acute transverse myelitis.</em> Neurology. 2002;59:499–505. <a href="https://pubmed.ncbi.nlm.nih.gov/12236201/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Tisavipat N, Flanagan EP. <em>Current perspectives on the diagnosis and management of acute transverse myelitis.</em> Expert Rev Neurother. 2023;23(4):389–411. <a href="https://pubmed.ncbi.nlm.nih.gov/37009826/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Thompson AJ, et al. <em>Diagnosis of multiple sclerosis: 2017 revisions of the McDonald criteria.</em> Lancet Neurol. 2018;17(2):162–173. [McDonald 2024 revision en implementación 2025.] <a href="https://www.emjreviews.com/neurology/congress-review/the-2024-revised-mcdonald-criteria-aan-2025-highlights-j310125/" target="_blank" style="color:var(--accent2);">→ Link 2024 revision</a></li>
+        </ol>
+      </div>
+
+      <div>
+        <h3 style="font-size:13px;color:var(--tab-isq);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:12px;">🫀 Lesión Medular Isquémica</h3>
+        <ol style="padding-left:18px;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Vergara P, et al. <em>Spinal cord infarction: Clinical and neuroradiological clues of a rare stroke subtype.</em> J Clin Med. 2025;14(4):1293. <a href="https://www.mdpi.com/2077-0383/14/4/1293" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Wiszniewska M. <em>Spinal cord ischemia: from diagnosis to treatment.</em> Med Res Arch. 2025;13(3). <a href="https://esmed.org/MRA/mra/article/view/6272" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Elshony H, et al. <em>Spinal cord ischemia – from diagnosis to treatment.</em> Neurol Neurochir Pol. 2024. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11304228/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Algahtani H, et al. <em>Spinal cord infarction: A systematic review and meta-analysis.</em> Surg Neurol Int. 2024. <a href="https://surgicalneurologyint.com/surgicalint-articles/spinal-cord-infarction-a-systematic-review-and-meta-analysis-of-patients-characteristics-diagnosis-accuracy-management-and-outcome/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Shakeel HA, et al. <em>Diagnostic and Therapeutic Challenges with Spinal Cord Infarction.</em> Stroke. 2025 (ISC Abstract WMP35) — apoyo epidemiológico y diagnóstico; no constituye guía terapéutica. <a href="https://www.ahajournals.org/doi/10.1161/str.56.suppl_1.WMP35" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Harazeen A, Patel A, Patel C. <em>Spinal cord infarction as a cause of acute myelopathy.</em> Cureus. 2023;15(12):e50379. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10782475/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Zalewski NL, et al. <em>Evaluation of idiopathic transverse myelitis revealing specific myelopathy diagnoses.</em> Neurology. 2018;90(2):e96–e102. <a href="https://pubmed.ncbi.nlm.nih.gov/29196575/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+        </ol>
+      </div>
+
+      <div>
+        <h3 style="font-size:13px;color:var(--tab-other);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:12px;">🔭 Otras Mielopatías</h3>
+        <ol style="padding-left:18px;display:flex;flex-direction:column;gap:10px;">
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Murphy OC, et al. <em>Clinical approach to myelopathy diagnosis.</em> Continuum (Minneap Minn). 2024. <a href="https://pubmed.ncbi.nlm.nih.gov/38330471/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Barreras P, et al. <em>Clinical biomarkers differentiate myelitis from vascular and other causes of myelopathy.</em> Neurology. 2018;90(1):e12–21. <a href="https://pubmed.ncbi.nlm.nih.gov/29196574/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Evaluation of Myelopathy and Radiculopathy. <em>In: Diseases of the Brain, Head and Neck, Spine 2024–2027.</em> NCBI Bookshelf. <a href="https://www.ncbi.nlm.nih.gov/books/NBK608592/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Clinical Approach to Myelopathy Diagnosis. <em>PMC Review.</em> 2025. <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11938100/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">Hsu JL, et al. <em>A comparison between spinal cord infarction and NMOSD: Clinical and MRI studies.</em> Sci Rep. 2019;9:7435. <a href="https://pubmed.ncbi.nlm.nih.gov/31092876/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+          <li style="font-size:12px;color:var(--text-muted);line-height:1.6;">NEUROMYELITIS Optica Spectrum Disorder (NMOSD). <em>StatPearls</em> [Internet]. 2024. <a href="https://www.ncbi.nlm.nih.gov/books/NBK572108/" target="_blank" style="color:var(--accent2);">→ Link</a></li>
+        </ol>
+      </div>
+
+    </div>
+    <p style="font-size:11px;color:var(--text-dim);margin-top:24px;padding-top:16px;border-top:1px solid var(--border);">
+      Guía elaborada con búsqueda sistemática en PubMed, PMC, Cochrane, EMBASE y fuentes institucionales (AO Spine, NEMOS, AHA, NINDS). Última revisión: mayo de 2026. Para uso clínico orientativo — siempre contrastar con guías institucionales vigentes.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
