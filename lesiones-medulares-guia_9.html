@@ -290,9 +290,9 @@
 
   <div class="sub-nav" role="tablist">
     <button type="button" class="sub-btn active" data-sub="t-epi" role="tab" aria-selected="true" onclick="switchSub('trauma','t-epi')">Epidemiología</button>
+    <button type="button" class="sub-btn" data-sub="t-cls" role="tab" aria-selected="false" onclick="switchSub('trauma','t-cls')">Clasificación ASIA</button>
     <button type="button" class="sub-btn" data-sub="t-path" role="tab" aria-selected="false" onclick="switchSub('trauma','t-path')">Fisiopatología</button>
     <button type="button" class="sub-btn" data-sub="t-dx" role="tab" aria-selected="false" onclick="switchSub('trauma','t-dx')">Diagnóstico</button>
-    <button type="button" class="sub-btn" data-sub="t-cls" role="tab" aria-selected="false" onclick="switchSub('trauma','t-cls')">Clasificación ASIA</button>
     <button type="button" class="sub-btn" data-sub="t-tx" role="tab" aria-selected="false" onclick="switchSub('trauma','t-tx')">Manejo Agudo</button>
     <button type="button" class="sub-btn" data-sub="t-cx" role="tab" aria-selected="false" onclick="switchSub('trauma','t-cx')">Complicaciones</button>
   </div>
@@ -539,7 +539,68 @@
       </div>
     </details>
 
-    <!-- 2. COMPONENTES -->
+    <!-- 2. TABLA AIS -->
+    <details class="accord" open>
+      <summary><span class="accord-icon">📊</span> Escala AIS A–E — Definición y pronóstico</summary>
+      <div class="accord-body">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:120px">Grado AIS</th>
+            <th>Definición</th>
+            <th>Claves clínicas</th>
+            <th>Pronóstico</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag tag-red" style="font-size:13px;font-weight:700">A</span><br><span style="font-size:12px">Completa</span></td>
+            <td>Sin función motora ni sensitiva en segmentos sacros S4–S5. Ausencia de sensibilidad perianal, presión anal profunda y contracción anal voluntaria.</td>
+            <td>"Completa" se refiere a la ausencia de preservación sacra, <strong>no</strong> a que todo el cuerpo esté sin función. Pueden existir zonas de preservación parcial (ZPP) por encima del nivel sacro. El examen de S4–S5 es determinante: un paciente aparentemente A con sensibilidad perianal es en realidad B.</td>
+            <td>Limitada. ~15–25% convierten a B/C en 1 año, especialmente con cirugía temprana.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-amber" style="font-size:13px;font-weight:700">B</span><br><span style="font-size:12px">Sensitiva incompleta</span></td>
+            <td>Función sensitiva preservada por debajo del NLI, incluyendo S4–S5. Sin función motora útil más allá de 3 niveles bajo el NLI.</td>
+            <td>El paciente <strong>siente pero no mueve</strong>. La preservación sensitiva sacra indica que las vías más largas no están completamente interrumpidas, abriendo una "ventana biológica" para recuperación motora. Diferencia con A: presencia de cualquier sensibilidad en S4–S5.</td>
+            <td>~54% recuperan función motora ambulatoria al año.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-amber" style="font-size:13px;font-weight:700">C</span><br><span style="font-size:12px">Motora incompleta</span></td>
+            <td>Función motora presente debajo del NLI, pero <strong>&gt;50% de los músculos clave con fuerza &lt;3/5</strong> — no vencen la gravedad.</td>
+            <td>Hay actividad motora presente pero insuficiente para funciones antigravitatorias. Diferencia con B: hay movimiento. Diferencia con D: esa fuerza no alcanza para vencer gravedad en la mayoría de los músculos evaluados. Progresa frecuentemente a D con rehabilitación intensiva.</td>
+            <td>Variable. Muchos progresan a D. Deambulación con asistencia en buena parte de los casos.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green" style="font-size:13px;font-weight:700">D</span><br><span style="font-size:12px">Motora incompleta</span></td>
+            <td>Función motora debajo del NLI con <strong>≥50% de los músculos clave con fuerza ≥3/5</strong> — vencen la gravedad o resisten carga.</td>
+            <td>Es el grado de mayor potencial ambulatorio. La fuerza ≥3/5 implica movimiento contra gravedad, lo que es funcionalmente significativo. Grupo que más se beneficia de cirugía temprana y rehabilitación intensiva. Diferencia con C: mayoría de músculos son antigravitacionales.</td>
+            <td>La mayoría logra deambulación independiente o con asistencia mínima.</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-green" style="font-size:13px;font-weight:700">E</span><br><span style="font-size:12px">Normal</span></td>
+            <td>Función sensitiva y motora completamente normal en todos los segmentos evaluados.</td>
+            <td>Se asigna <strong>solo</strong> si el paciente previamente tuvo déficits documentados y se recuperó. No aplica a quien nunca tuvo lesión. En práctica clínica es raro; indica recuperación neurológica completa.</td>
+            <td>Excelente.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="info-block" style="margin-top:14px">
+      <h4>🔑 Diferencias clave entre grados adyacentes</h4>
+      <ul>
+        <li><strong>A → B:</strong> presencia de cualquier sensibilidad en S4–S5 (perianal, presión anal profunda)</li>
+        <li><strong>B → C:</strong> presencia de función motora por debajo del NLI (cualquier movimiento voluntario)</li>
+        <li><strong>C → D:</strong> si ≥50% de los músculos clave alcanzan fuerza ≥3/5 (antigravitacional)</li>
+        <li><strong>D → E:</strong> normalización completa de motor y sensitivo en paciente con lesión previa documentada</li>
+      </ul>
+      <p style="margin-top:8px;font-size:13px;color:var(--text-dim)">Por esto el examen de S4–S5 es crítico al ingreso: un paciente que parece AIS A pero tiene sensibilidad perianal es en realidad AIS B, con pronóstico y manejo completamente diferentes.</p>
+    </div>
+      </div>
+    </details>
+
+    <!-- 3. COMPONENTES -->
     <details class="accord">
       <summary><span class="accord-icon">🔬</span> Componentes del examen</summary>
       <div class="accord-body">
@@ -668,7 +729,7 @@
       </div>
     </details>
 
-    <!-- 4. DERMATOMAS -->
+    <!-- 5. DERMATOMAS -->
     <details class="accord">
       <summary><span class="accord-icon">🗺️</span> Puntos sensitivos por dermatoma (LT y PP)</summary>
       <div class="accord-body">
@@ -728,7 +789,7 @@
       </div>
     </details>
 
-    <!-- 5. CÁLCULO NLI -->
+    <!-- 6. CÁLCULO NLI -->
     <details class="accord">
       <summary><span class="accord-icon">📐</span> Cómo se calcula el NLI</summary>
       <div class="accord-body">
@@ -788,7 +849,7 @@
       </div>
     </details>
 
-    <!-- 6. FLUJO AIS -->
+    <!-- 7. FLUJO AIS -->
     <details class="accord">
       <summary><span class="accord-icon">🔄</span> Flujo diagnóstico → AIS</summary>
       <div class="accord-body">
@@ -836,68 +897,6 @@
             <li>ZPP sensitiva derecha / izquierda (solo AIS A)</li>
           </ul>
         </div>
-      </div>
-    </details>
-
-    <!-- 7. TABLA AIS -->
-    <details class="accord" open>
-      <summary><span class="accord-icon">📊</span> Escala AIS A–E — Definición y pronóstico</summary>
-      <div class="accord-body">
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:120px">Grado AIS</th>
-            <th>Definición</th>
-            <th>Claves clínicas</th>
-            <th>Pronóstico</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="tag tag-red" style="font-size:13px;font-weight:700">A</span><br><span style="font-size:12px">Completa</span></td>
-            <td>Sin función motora ni sensitiva en segmentos sacros S4–S5. Ausencia de sensibilidad perianal, presión anal profunda y contracción anal voluntaria.</td>
-            <td>"Completa" se refiere a la ausencia de preservación sacra, <strong>no</strong> a que todo el cuerpo esté sin función. Pueden existir zonas de preservación parcial (ZPP) por encima del nivel sacro. El examen de S4–S5 es determinante: un paciente aparentemente A con sensibilidad perianal es en realidad B.</td>
-            <td>Limitada. ~15–25% convierten a B/C en 1 año, especialmente con cirugía temprana.</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-amber" style="font-size:13px;font-weight:700">B</span><br><span style="font-size:12px">Sensitiva incompleta</span></td>
-            <td>Función sensitiva preservada por debajo del NLI, incluyendo S4–S5. Sin función motora útil más allá de 3 niveles bajo el NLI.</td>
-            <td>El paciente <strong>siente pero no mueve</strong>. La preservación sensitiva sacra indica que las vías más largas no están completamente interrumpidas, abriendo una "ventana biológica" para recuperación motora. Diferencia con A: presencia de cualquier sensibilidad en S4–S5.</td>
-            <td>~54% recuperan función motora ambulatoria al año.</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-amber" style="font-size:13px;font-weight:700">C</span><br><span style="font-size:12px">Motora incompleta</span></td>
-            <td>Función motora presente debajo del NLI, pero <strong>&gt;50% de los músculos clave con fuerza &lt;3/5</strong> — no vencen la gravedad.</td>
-            <td>Hay actividad motora presente pero insuficiente para funciones antigravitatorias. Diferencia con B: hay movimiento. Diferencia con D: esa fuerza no alcanza para vencer gravedad en la mayoría de los músculos evaluados. Progresa frecuentemente a D con rehabilitación intensiva.</td>
-            <td>Variable. Muchos progresan a D. Deambulación con asistencia en buena parte de los casos.</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-green" style="font-size:13px;font-weight:700">D</span><br><span style="font-size:12px">Motora incompleta</span></td>
-            <td>Función motora debajo del NLI con <strong>≥50% de los músculos clave con fuerza ≥3/5</strong> — vencen la gravedad o resisten carga.</td>
-            <td>Es el grado de mayor potencial ambulatorio. La fuerza ≥3/5 implica movimiento contra gravedad, lo que es funcionalmente significativo. Grupo que más se beneficia de cirugía temprana y rehabilitación intensiva. Diferencia con C: mayoría de músculos son antigravitacionales.</td>
-            <td>La mayoría logra deambulación independiente o con asistencia mínima.</td>
-          </tr>
-          <tr>
-            <td><span class="tag tag-green" style="font-size:13px;font-weight:700">E</span><br><span style="font-size:12px">Normal</span></td>
-            <td>Función sensitiva y motora completamente normal en todos los segmentos evaluados.</td>
-            <td>Se asigna <strong>solo</strong> si el paciente previamente tuvo déficits documentados y se recuperó. No aplica a quien nunca tuvo lesión. En práctica clínica es raro; indica recuperación neurológica completa.</td>
-            <td>Excelente.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="info-block" style="margin-top:14px">
-      <h4>🔑 Diferencias clave entre grados adyacentes</h4>
-      <ul>
-        <li><strong>A → B:</strong> presencia de cualquier sensibilidad en S4–S5 (perianal, presión anal profunda)</li>
-        <li><strong>B → C:</strong> presencia de función motora por debajo del NLI (cualquier movimiento voluntario)</li>
-        <li><strong>C → D:</strong> si ≥50% de los músculos clave alcanzan fuerza ≥3/5 (antigravitacional)</li>
-        <li><strong>D → E:</strong> normalización completa de motor y sensitivo en paciente con lesión previa documentada</li>
-      </ul>
-      <p style="margin-top:8px;font-size:13px;color:var(--text-dim)">Por esto el examen de S4–S5 es crítico al ingreso: un paciente que parece AIS A pero tiene sensibilidad perianal es en realidad AIS B, con pronóstico y manejo completamente diferentes.</p>
-    </div>
       </div>
     </details>
 
